@@ -32,7 +32,7 @@ export default function JobQuestDetail(){
               </p>
               <p className="bg-orange-500/50 hover:bg-orange-500/80 duration-200 border-1 p-2">
                 💾 Post your Job hiring <br></br>
-                Don't just find a job, create jobs for people too
+                Don&apos;t just find a job, create jobs for people too
               </p>
               <p className="bg-orange-500/50 hover:bg-orange-500/80 duration-200 border-1 p-2">
                 ❤️ Send your Resume instantly <br></br>

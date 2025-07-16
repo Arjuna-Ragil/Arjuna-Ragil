@@ -35,15 +35,11 @@ export function ProjectDataProvider({ children }){
         }
     ]
 
-    function selectedData(){
+    useEffect(() => {
         if (!show || !selector) return 
         const selected = projectData.find(project => project.title.toLowerCase() === selector.toLowerCase())
         setData(selected)
         setShowDetail(selected.title)
-    }
-
-    useEffect(() => {
-        selectedData()
     }, [selector])
     
 
