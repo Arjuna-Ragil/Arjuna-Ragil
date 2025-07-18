@@ -9,8 +9,8 @@ export default function JobQuestDetail(){
   if (showDetail !== "JobQues") return 
 
     return(
-        <div className="w-full h-260 flex items-center justify-center col-span-2 lg:px-10 px-5 animate-dropDown origin-top">
-          <div className="h-full w-full overflow-scroll flex justify-center flex-col gap-5 bg-blue-200/10 rotate-z-1 -rotate-x-5 -rotate-y-15 scale-y-120 p-5 py-25 text-center text-white">
+        <div className="w-full h-full flex items-center justify-center col-span-2 lg:px-10 md:px-5 animate-dropDown origin-top">
+          <div className="h-fit w-full flex justify-center flex-col gap-5 bg-blue-200/10 md:rotate-z-1 md:-rotate-x-5 md:-rotate-y-15 scale-y-120 p-5 md:py-25 pb-10 pt-30 text-center text-white">
             <h3 className="text-2xl font-bold shadow-2xl">Project Details</h3>
             <div className="flex flex-row justify-evenly items-center">
               <Image src={"/project/jqDoc1.svg"} alt="picprice doc 1" width={300} height={300} className="aspect-video border-1 border-white"/>
@@ -21,7 +21,7 @@ export default function JobQuestDetail(){
               is hard
             </p>
             <h4 className="text-xl font-semibold">Features</h4>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="sm:grid sm:grid-cols-2 flex flex-col gap-3">
               <p className="col-span-2 bg-orange-500/50 hover:bg-orange-500/80 duration-200 border-1 p-2">
                 🔍 Easy Job Search<br></br>
                 Just search for the company name or job role, and all the job based on that search will appear

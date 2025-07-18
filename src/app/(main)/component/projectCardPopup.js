@@ -14,14 +14,14 @@ export default function ProjectCardPopup() {
   return (
     <div className={`fixed z-50 h-full w-full`}>
       <div
-        className="-z-10 h-full w-full bg-black/50 backdrop-blur-md grid grid-cols-3"
+        className="-z-10 h-full overflow-scroll w-full bg-black/50 backdrop-blur-md md:grid md:grid-cols-3 flex flex-col"
         onClick={() => {setShow(false), setData(null), setSelector("")}}
       >
-        <div className="z-50 -rotate-z-6 rotate-x-10 rotate-y-12 flex h-full w-full items-center justify-center animate-cardSpin">
+        <div className="z-50 md:-rotate-z-6 md:rotate-x-10 md:rotate-y-12 flex h-full w-full items-center max-md:bg-blue-200/10 justify-center md:animate-cardSpin max-md:p-5">
           <div
-            className={`flex h-fit w-fit flex-col rounded-2xl border-2 border-black text-white ${data.color}`}
+            className={`flex h-fit w-fit flex-col rounded-2xl border-2 border-black text-white ${data.color} shadow-2xl max-md:animate-cardSpin`}
           >
-            <div className="flex flex-col items-center text-center border-b-1 border-black py-3">
+            <div className="flex flex-col items-center text-center border-b-1 border-black py-3 px-2">
               <h2>{data.title}</h2>
               <p>{data.shortDescription}</p>
             </div>
