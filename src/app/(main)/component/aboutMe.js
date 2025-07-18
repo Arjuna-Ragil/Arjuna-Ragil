@@ -2,7 +2,7 @@ export default function AboutMe() {
   return (
     <>
       <div className="absolute -z-10 flex h-full w-full rotate-3 flex-col border-1 border-black/20 bg-orange-200 p-5 shadow-lg"></div>
-      <div className="flex lg:h-full h-full w-full -rotate-6 flex-col justify-center border-1 border-black/20 bg-yellow-200 p-5 shadow-xl duration-500 group-hover:absolute group-hover:translate-[50%] group-hover:scale-110 group-hover:rotate-0 hover:shadow-2xl">
+      <div className="flex xl:h-full h-full w-full -rotate-6 max-md:rotate-0 flex-col justify-center border-1 border-black/20 bg-yellow-200 p-5 shadow-xl duration-500 group-hover:absolute group-hover:translate-[50%] group-hover:scale-110 group-hover:rotate-0 hover:shadow-2xl">
         <h2 className="text-center 2xl:text-4xl xl:text-2xl text-base font-bold">About Me</h2>
         <br></br>
         <p className="text-justify 2xl:text-xl xl:text-lg text-xs">

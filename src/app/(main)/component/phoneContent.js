@@ -45,7 +45,7 @@ export default function PhoneContent() {
           <div className="h-full w-full p-5">
             <div className="h-full w-full bg-gray-700/50 rounded-2xl p-5 flex flex-col gap-5">
               <h2 className="lg:text-3xl font-semibold text-center">TechStack</h2>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 max-md:grid-cols-2 gap-3">
                 {techStack.map((tech) => (
                   <div key={tech.id} className="aspect-square flex flex-col items-center justify-center">
                     <Image src={tech.image} alt="techStacks" width={70} height={70}/>

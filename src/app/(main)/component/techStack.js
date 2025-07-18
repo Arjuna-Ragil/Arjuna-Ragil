@@ -21,7 +21,7 @@ export default function TechStack() {
   }, [])
 
   return (
-    <div className="h-fit w-fit rounded-3xl border-2 bg-blue-200 p-3">
+    <div className="xl:h-full h-fit w-fit rounded-3xl border-2 bg-blue-200 p-3">
       <div
         className={`h-full w-full ${turnOn ? "bg-[url(/phoneWallpaper.svg)]" : "bg-gray-900"} rounded-2xl border-1 bg-cover bg-center relative`}
         onClick={() => setTurnOn(true)}
