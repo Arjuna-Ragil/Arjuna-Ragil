@@ -9,8 +9,8 @@ export default function JobQuestDetail(){
   if (showDetail !== "JobQues") return 
 
     return(
-        <div className="w-full h-full flex items-center justify-center col-span-2 lg:px-10 md:px-5 animate-dropDown origin-top">
-          <div className="h-fit w-full flex justify-center flex-col gap-5 bg-blue-200/10 md:rotate-z-1 md:-rotate-x-5 md:-rotate-y-15 scale-y-120 p-5 md:py-25 pb-10 pt-30 text-center text-white">
+        <div className="w-full h-full flex md:items-center md:justify-center col-span-2 lg:px-10 md:px-5 animate-dropDown origin-top">
+          <div className="h-fit w-full flex md:justify-center flex-col gap-5 bg-blue-200/10 md:rotate-z-1 md:-rotate-x-5 md:-rotate-y-15 scale-y-120 p-5 md:py-25 pb-10 pt-30 text-center text-white">
             <h3 className="text-2xl font-bold shadow-2xl">Project Details</h3>
             <div className="flex flex-row justify-evenly items-center">
               <Image src={"/project/jqDoc1.svg"} alt="picprice doc 1" width={300} height={300} className="aspect-video border-1 border-white"/>

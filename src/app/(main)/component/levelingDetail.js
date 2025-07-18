@@ -9,8 +9,8 @@ export default function LevelingDetail(){
   if (showDetail !== "Leveling") return
 
     return(
-        <div className="w-full h-full flex items-center justify-center col-span-2 md:px-10 animate-dropDown origin-top">
-          <div className="h-fit w-full justify-center overflow-y-scroll flex flex-col gap-5 bg-blue-400/10 md:rotate-z-1 md:-rotate-x-5 md:-rotate-y-15 scale-y-120 p-5 md:py-25 pb-10 pt-30 text-center text-white">
+        <div className="w-full h-full flex md:items-center md:justify-center col-span-2 md:px-10 animate-dropDown origin-top">
+          <div className="h-fit w-full md:justify-center flex flex-col gap-5 bg-blue-400/10 md:rotate-z-1 md:-rotate-x-5 md:-rotate-y-15 scale-y-120 p-5 md:py-25 pb-10 pt-30 text-center text-white">
             <h3 className="text-2xl font-bold shadow-2xl">Project Details</h3>
             <div className="flex flex-row md:gap-3 justify-evenly items-center">
               <Image src={"/project/lvlDoc1.svg"} alt="picprice doc 1" width={150} height={150} className=" border-1 shadow-2xl rounded-3xl"/>

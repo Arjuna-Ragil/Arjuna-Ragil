@@ -5,7 +5,7 @@ export default function Project() {
   return (
     <div className="group relative h-full w-full flex items-center justify-center">
       <div className="absolute ml-20 flex h-full w-full items-center">
-        <div className="h-fit w-fit translate-x-0 bg-white p-3 duration-200 group-hover:-translate-x-50">
+        <div className="h-fit w-fit translate-x-0 bg-white p-3 duration-200 lg:group-hover:-translate-x-50">
           Note to self: <br></br>
           Press the card<br></br> to see the <br></br> project details
         </div>
