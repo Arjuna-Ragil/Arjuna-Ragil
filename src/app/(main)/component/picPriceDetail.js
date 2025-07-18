@@ -9,12 +9,12 @@ export default function PicPriceDetail(){
   if (showDetail !== "PicPrice") return 
 
     return(
-        <div className="w-full h-full flex md:items-center md:justify-center col-span-2 md:px-10 animate-dropDown origin-top">
-          <div className="h-fit w-full flex md:justify-center flex-col gap-5 bg-blue-200/10 md:rotate-z-1 md:-rotate-x-5 md:-rotate-y-15 scale-y-120 p-5 md:py-25 pb-10 pt-30 text-center text-white">
+        <div className="w-full h-full flex md:items-center md:justify-center col-span-2 md:px-10 animate-dropDown origin-top md:py-5">
+          <div className="h-fit md:border-2 w-full flex md:justify-center flex-col gap-5 bg-blue-200/10 md:rotate-z-1 md:-rotate-x-5 md:-rotate-y-15 p-5 md:pt-10 pb-10  text-center text-white">
             <h3 className="text-2xl font-bold shadow-2xl">Project Details</h3>
             <div className="flex flex-row justify-evenly items-center">
               <Image src={"/project/ppDoc1.svg"} alt="picprice doc 1" width={300} height={300} className="aspect-video border-1 border-white"/>
-              <Image src={"/project/ppDoc2.svg"} alt="picprice doc 2" width={300} height={300} className="aspect-video border-1 border-white hidden lg:flex"/>
+              <Image src={"/project/ppDoc2.svg"} alt="picprice doc 2" width={300} height={300} className="aspect-video border-1 border-white hidden xl:flex"/>
             </div>
             <p>
               PicPrice is an AI-powered web application that allows users to upload or take a picture of a product and instantly 

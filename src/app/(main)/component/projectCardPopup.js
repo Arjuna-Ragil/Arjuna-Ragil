@@ -17,7 +17,7 @@ export default function ProjectCardPopup() {
         className="-z-10 h-full overflow-scroll w-full bg-black/50 backdrop-blur-md md:grid md:grid-cols-3 flex flex-col"
         onClick={() => {setShow(false), setData(null), setSelector("")}}
       >
-        <div className="z-50 md:-rotate-z-6 md:rotate-x-10 md:rotate-y-12 flex h-full w-full items-center max-md:bg-blue-200/10 justify-center md:animate-cardSpin max-md:p-5">
+        <div className={`z-50 md:max-2xl:pl-5 md:-rotate-z-6 md:rotate-x-10 md:rotate-y-12 flex h-full w-full items-center justify-center md:animate-cardSpin max-md:p-5`}>
           <div
             className={`flex h-fit w-fit flex-col rounded-2xl border-2 border-black text-white ${data.color} shadow-2xl max-md:animate-cardSpin`}
           >
