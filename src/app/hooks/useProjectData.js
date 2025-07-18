@@ -29,7 +29,7 @@ export function ProjectDataProvider({ children }){
         {
             title: "JobQues",
             shortDescription: "A single web to find your dream job",
-            image_URL: "/project/jobQuesLogo.png",
+            image_URL: "/project/jobquesLogo.png",
             color: "bg-orange-500",
             techStack: ["HTML", "CSS", "JS", "EJS", "NodeJS", "ExpressJS"]
         }

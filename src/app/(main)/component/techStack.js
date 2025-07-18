@@ -21,7 +21,7 @@ export default function TechStack() {
   }, [])
 
   return (
-    <div className="h-full w-full rounded-3xl border-2 bg-blue-200 p-3">
+    <div className="h-fit w-fit rounded-3xl border-2 bg-blue-200 p-3">
       <div
         className={`h-full w-full ${turnOn ? "bg-[url(/phoneWallpaper.svg)]" : "bg-gray-900"} rounded-2xl border-1 bg-cover bg-center relative`}
         onClick={() => setTurnOn(true)}
@@ -33,14 +33,11 @@ export default function TechStack() {
         }}
       >
         <div className="aspect-square w-5 mt-4 h-auto bg-black/70 border-2 border-black rounded-full flex self-start justify-self-center absolute"></div>
-        {turnOn ? 
-        <PhoneContent/>
-        :
-        <div className="h-full w-full text-center flex flex-col justify-center text-white animate-pulse">
-            <h2 className="text-2xl font-bold">Sleep Mode</h2>
-            <p>Press to Open</p>
+        <div className={`h-full w-full bg-black text-center flex flex-col absolute justify-center text-white z-10 ${turnOn ? "hidden" : ""} rounded-xl`}>
+            <h2 className="text-2xl font-bold animate-pulse">Sleep Mode</h2>
+            <p className="animate-pulse">Press to Open</p>
         </div> 
-        }
+        <PhoneContent/>
       </div>
     </div>
   );

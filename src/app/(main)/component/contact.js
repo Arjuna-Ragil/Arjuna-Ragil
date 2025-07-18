@@ -11,19 +11,19 @@ export default function Contact() {
                 <div className="w-full bg-black h-1 z-10 rounded-2xl shadow-2xl"></div>
                 <div className="w-full bg-black h-1 z-10 rounded-2xl shadow-2xl"></div>
                 <div className="w-full bg-black h-1 z-10 rounded-2xl shadow-2xl"></div>
-                <div className="w-full bg-black h-1 z-10 rounded-2xl shadow-2xl"></div>
+                <div className="lg:w-full w-3 h-1 z-10 rounded-2xl shadow-2xl"></div>
                 <div className="w-full bg-black h-1 z-10 rounded-2xl shadow-2xl"></div>
                 <div className="w-full bg-black h-1 z-10 rounded-2xl shadow-2xl"></div>
                 <div className="w-full bg-black h-1 z-10 rounded-2xl shadow-2xl"></div>
                 <div className="w-full bg-black h-1 z-10 rounded-2xl shadow-2xl"></div>
                 <div className="w-full bg-black h-1 z-10 rounded-2xl shadow-2xl"></div>
             </div>
-            <div className="h-full w-full text-gray-600 bg-neutral-100 border-t-2 border-b-4 border-r-4 border-amber-800 rounded-r-2xl p-10 flex flex-col gap-10 justify-between">
-                <h2 className="text-2xl">
+            <div className="h-full w-full text-gray-600 bg-neutral-100 border-t-2 border-b-4 border-r-4 border-amber-800 rounded-r-2xl lg:p-10 p-5 flex flex-col lg:gap-10 gap-2 justify-between">
+                <h2 className="lg:text-2xl text-lg">
                     Boss Note: <br></br>
                     Contact this Person ASAP!
                 </h2>
-                <ul className="text-lg list-disc space-y-3">
+                <ul className="lg:text-lg text-sm list-disc space-y-3">
                     <li>Phone: 0812-1794-2843</li>
                     <li>Email: arjunaragilputera@gmail.com </li>
                     <li>LinkedIn: linkedin.com/in/arjunaragilputera</li>

@@ -21,7 +21,7 @@ export default function ProjectCardPopup() {
           <div
             className={`flex h-fit w-fit flex-col rounded-2xl border-2 border-black text-white ${data.color}`}
           >
-            <div className="flex flex-col items-center border-b-1 border-black py-3">
+            <div className="flex flex-col items-center text-center border-b-1 border-black py-3">
               <h2>{data.title}</h2>
               <p>{data.shortDescription}</p>
             </div>
@@ -35,7 +35,7 @@ export default function ProjectCardPopup() {
               />
               <div className="flex flex-col justify-center p-3">
                 <h3>TechStack: </h3>
-                <ul className={`ml-4 grid list-disc space-x-5 ${(showDetail === "Leveling") ? "grid-cols-1" : "grid-cols-2"}`}>
+                <ul className={`ml-4 grid list-disc space-x-5 ${(showDetail === "Leveling") ? "lg:grid-cols-1" : "lg:grid-cols-2"} grid-cols-1`}>
                   {data.techStack.map((tech) => (
                     <li key={tech}>{tech}</li>
                   ))}
