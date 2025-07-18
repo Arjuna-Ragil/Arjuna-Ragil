@@ -11,7 +11,7 @@ export default function Project() {
         </div>
       </div>
       <div className="col-span-2 flex xl:h-full h-4/5 w-full rotate-2 flex-col gap-5 rounded-2xl border-2 border-black bg-gradient-to-br from-neutral-800 to-neutral-700 p-5 text-white shadow-2xl">
-        <h2 className="text-center">Project Wallet</h2>
+        <h2 className="text-center text-2xl font-bold">Project Wallet</h2>
         <div className="flex h-full w-full flex-col items-center gap-4 rounded-2xl text-center shadow-2xl xl:pb-30 pb-15">
           <ProjectCard title={"PicPrice"} desc={"A price detector app powered by Gemini AI"} color={"bg-blue-300"} selector={"picPrice"}/>
           <ProjectCard title={"Leveling"} desc={"An app to gamify your life"} color={"bg-blue-500"} selector={"leveling"}/>

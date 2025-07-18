@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Contact() {
     return(
@@ -19,11 +18,11 @@ export default function Contact() {
                 <div className="w-full max-md:h-full max-md:w-1 bg-black h-1 z-10 rounded-2xl shadow-2xl"></div>
             </div>
             <div className="h-full w-full text-gray-600 bg-neutral-100 border-t-2 max-md:border-t-0 border-b-4 border-r-4 max-md:border-l-4 border-amber-800 rounded-r-2xl max-md:rounded-r-none lg:p-10 p-5 flex flex-col lg:gap-10 gap-2 justify-between">
-                <h2 className="lg:text-2xl text-lg">
+                <h2 className="2xl:text-4xl xl:text-3xl lg:text-2xl md:text-xl text-lg font-bold">
                     Boss Note: <br></br>
                     Contact this Person ASAP!
                 </h2>
-                <ul className="lg:text-lg text-sm list-disc space-y-3">
+                <ul className="lg:text-xl md:text-lg sm:text-base text-sm list-disc space-y-3 sm:px-3">
                     <li>Phone: 0812-1794-2843</li>
                     <li>Email: arjunaragilputera@gmail.com </li>
                     <li>LinkedIn: linkedin.com/in/arjunaragilputera</li>
@@ -37,9 +36,9 @@ export default function Contact() {
                     <Image src={"/linkedinLogo.svg"} alt="linkedin" width={50} height={50} className="grayscale-100 hover:grayscale-0"/>
                     </a>
                 </div>
-                <Link href={"/"} className="flex self-center text-center border-2 border-gray-950/50 w-fit p-2 hover:border-black duration-200">
+                <a href="mailto:arjunaragilputera@gmail.com" className="flex self-center text-center border-2 border-gray-950/50 w-fit p-2 hover:border-black duration-200">
                     Do The Work Now
-                </Link>
+                </a>
             </div>
         </div>
     )

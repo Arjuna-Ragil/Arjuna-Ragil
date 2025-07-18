@@ -22,7 +22,7 @@ export default function ProjectCardPopup() {
             className={`flex h-fit w-fit flex-col rounded-2xl border-2 border-black text-white ${data.color} shadow-2xl max-md:animate-cardSpin`}
           >
             <div className="flex flex-col items-center text-center border-b-1 border-black py-3 px-2">
-              <h2>{data.title}</h2>
+              <h2 className="text-2xl font-bold">{data.title}</h2>
               <p>{data.shortDescription}</p>
             </div>
             <div className="flex flex-row items-center justify-center gap-3 p-5">

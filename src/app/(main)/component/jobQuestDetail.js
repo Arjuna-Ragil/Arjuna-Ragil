@@ -23,23 +23,23 @@ export default function JobQuestDetail(){
             <h4 className="text-xl font-semibold">Features</h4>
             <div className="sm:grid sm:grid-cols-2 flex flex-col gap-3">
               <p className="col-span-2 bg-orange-500/50 hover:bg-orange-500/80 duration-200 border-1 p-2">
-                🔍 Easy Job Search<br></br>
+                <b>🔍 Easy Job Search</b><br></br>
                 Just search for the company name or job role, and all the job based on that search will appear
               </p>
               <p className="bg-orange-500/50 hover:bg-orange-500/80 duration-200 border-1 p-2">
-                🧠 Login System <br></br>
+                <b>🧠 Login System</b> <br></br>
                 The web is secured with a login system with Passport.Js
               </p>
               <p className="bg-orange-500/50 hover:bg-orange-500/80 duration-200 border-1 p-2">
-                💾 Post your Job hiring <br></br>
+                <b>💾 Post your Job hiring</b> <br></br>
                 Don&apos;t just find a job, create jobs for people too
               </p>
               <p className="bg-orange-500/50 hover:bg-orange-500/80 duration-200 border-1 p-2">
-                ❤️ Send your Resume instantly <br></br>
+                <b>❤️ Send your Resume instantly</b> <br></br>
                 Fill the form and your resume will be send
               </p>
               <p className="bg-orange-500/50 hover:bg-orange-500/80 duration-200 border-1 p-2">
-                👤 Change your Profile <br></br>
+                <b>👤 Change your Profile</b> <br></br>
                 Pick the best photo of yourself
               </p>
             </div>

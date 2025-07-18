@@ -36,15 +36,15 @@ export default function LevelingDetail(){
               <div className="flex flex-col gap-3 justify-evenly">
                 <h4 className="text-xl font-semibold">Features</h4>
                 <p className="bg-blue-500/50 hover:bg-blue-500/80 duration-200 border-1 p-2">
-                  🧠 Gamify with Quest <br></br>
+                  <b>🧠 Gamify with Quest</b> <br></br>
                   Create quest to gamify your routine
                 </p>
                 <p className="bg-blue-500/50 hover:bg-blue-500/80 duration-200 border-1 p-2">
-                  💾 Track your Level <br></br>
+                  <b>💾 Track your Level</b> <br></br>
                   Earn exp from quest and try to reach the highest level
                 </p>
                 <p className="bg-blue-500/50 hover:bg-blue-500/80 duration-200 border-1 p-2">
-                  ❤️ Control your Consumer Habit <br></br>
+                  <b>❤️ Control your Consumer Habit</b> <br></br>
                   Buying only when enough gold from quest is collected
                 </p>
               </div>
