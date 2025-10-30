@@ -28,7 +28,6 @@ export default function HeroBg(){
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
             //control = new OrbitControls(camera, renderer.domElement)
-            //scene.add(control)
 
             cameraPivot = new THREE.Group();
             scene.add(cameraPivot);
