@@ -1,7 +1,7 @@
-import Intro from "./component/intro";
+import Container from "./component/container";
 
 export default function Main(){
     return(
-        <Intro/>
+        <Container/>
     )
 }

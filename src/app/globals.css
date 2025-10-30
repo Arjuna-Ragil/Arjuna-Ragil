@@ -3,5 +3,24 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme{
-  
+  --animate-height: Height 1s ease-in-out;
+  --animate-pulseV2: PulseV2 2s linear infinite;
+
+  @keyframes Height {
+    0% {
+        transform: scaleY(0)
+    }
+    100% {
+        transform: scaleY(1)
+    }
+  }
+
+  @keyframes PulseV2 {
+    0% {
+        opacity: 70%
+    }
+    100% {
+        opacity: 100%
+    }
+  }
 }
