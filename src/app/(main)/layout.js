@@ -3,7 +3,7 @@ import { ProfileProvider } from "./hook/useProfile";
 import { WindowProvider } from "./hook/useWindow";
 
 export const metadata = {
-  title: "Juna Port",
+  title: "Juna Space Port",
   description: "Shipping my info, to you",
 };
 

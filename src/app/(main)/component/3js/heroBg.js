@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import * as THREE from 'three';
 import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
@@ -11,6 +11,8 @@ import { useWindow } from "../../hook/useWindow";
 export default function HeroBg(){
     const canvasRef = useRef(null)
     const { setShowWindow, setShowConsole } = useWindow()
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadProgress, setLoadProgress] = useState(0);
 
     useEffect(() => {
         if (history.scrollRestoration) {
@@ -23,6 +25,24 @@ export default function HeroBg(){
         let startPositionZ = 5
 
         const init = () => {
+            const loadingManager = new THREE.LoadingManager();
+
+            // 2. Tentukan apa yang terjadi saat SEMUA loader selesai
+            loadingManager.onLoad = () => {
+                console.log("Semua aset berhasil di-load!");
+                setIsLoading(false); // <-- Sembunyikan loading screen
+            };
+
+            // 3. (Opsional) Tentukan apa yang terjadi saat ada progres
+            loadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
+                const progress = itemsLoaded / itemsTotal;
+                setLoadProgress(progress); // Update state progress bar
+            };
+
+            loadingManager.onError = (url) => {
+                console.error('Ada error saat me-load:', url);
+            };
+
             scene = new THREE.Scene()
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / innerHeight, 0.1, 1000)
             camera.position.set(0, 2, startPositionZ)
@@ -39,14 +59,14 @@ export default function HeroBg(){
 
             cameraPivot.add(camera);
 
-            const hdrLoader = new EXRLoader()
+            const hdrLoader = new EXRLoader(loadingManager)
             hdrLoader.load('/3js/heroSkybox.exr', (skybox) => {
                 scene.background = skybox
                 skybox.mapping = THREE.EquirectangularReflectionMapping
                 scene.environment = skybox;
             })
 
-            const gltfLoader = new GLTFLoader()
+            const gltfLoader = new GLTFLoader(loadingManager)
 
             gltfLoader.load('/3js/blackHole.glb', (gltf) => {
                 const blackhole = gltf.scene
@@ -122,6 +142,15 @@ export default function HeroBg(){
     
 
     return(
-        <canvas ref={canvasRef} className="h-screen w-screen -z-50 fixed"/>
+        <>
+            {isLoading && (
+                <div className="absolute top-0 left-0 h-screen w-full flex flex-col items-center justify-center bg-black z-50">
+                    <p className="text-white text-2xl">Loading...</p>
+                    <p className="text-white mt-2">{Math.round(loadProgress * 100)}%</p>
+                </div>
+            )} 
+
+            <canvas ref={canvasRef} className={`h-screen w-screen -z-50 fixed ${isLoading ? 'opacity-0' : 'opacity-100'}`}/>
+        </>
     )
 }
