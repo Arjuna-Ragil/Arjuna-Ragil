@@ -1,5 +1,5 @@
 import "../globals.css";
-import { SwitchProvider } from "./hook/useSwitch";
+import { ProfileProvider } from "./hook/useProfile";
 import { WindowProvider } from "./hook/useWindow";
 
 export const metadata = {
@@ -10,12 +10,12 @@ export const metadata = {
 export default function MainLayout({ children }){
     return(
         <html lang="en">
-            <body className="h-full w-full overflow-x-hidden">
-                <SwitchProvider>
-                    <WindowProvider>
+            <body className="h-full w-full overflow-x-hidden bg-black">
+                <WindowProvider>
+                    <ProfileProvider>
                         {children}
-                    </WindowProvider>
-                </SwitchProvider>
+                    </ProfileProvider>
+                </WindowProvider>
             </body>
         </html>
     )

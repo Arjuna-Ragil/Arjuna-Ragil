@@ -39,8 +39,6 @@ export default function HeroBg(){
                 scene.background = skybox
                 skybox.mapping = THREE.EquirectangularReflectionMapping
                 scene.environment = skybox;
-                scene.backgroundIntensity = 0.05;
-                scene.environmentIntensity = 0.01;
             })
 
             const gltfLoader = new GLTFLoader()
@@ -79,7 +77,7 @@ export default function HeroBg(){
                 tl.to(camera.position, {
                     z: "+= 25",
                     y: "-= 2",
-                    duration: 2,
+                    duration: 3,
                     ease: "power2.inOut",
                     onComplete: () => {
                         setShowConsole(true)
@@ -88,7 +86,7 @@ export default function HeroBg(){
 
                 tl.add(() => {
                     setShowWindow(true);
-                }, "<" + 1.2)
+                }, "<" + 2.3)
             }
         }
 
@@ -119,6 +117,6 @@ export default function HeroBg(){
     
 
     return(
-        <canvas ref={canvasRef} className="h-screen w-screen absolute"/>
+        <canvas ref={canvasRef} className="h-screen w-screen -z-50 fixed"/>
     )
 }

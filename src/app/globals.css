@@ -3,6 +3,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme{
+  --color-screen: #e0f9ff;
+  --color-screen-container: #97ebff;
+
   --animate-height: Height 1s ease-in-out;
   --animate-pulseV2: PulseV2 2s linear infinite;
 

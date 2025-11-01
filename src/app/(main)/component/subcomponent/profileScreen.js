@@ -1,0 +1,120 @@
+'use client'
+
+import Image from "next/image"
+import { useProfile } from "../../hook/useProfile"
+import { BriefcaseBusiness, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react"
+
+export default function ProfileScreen(){
+    const { showComp, showDoc, setShowComp, setShowDoc } = useProfile()
+
+    const shortDesc = 
+    `
+        I'm Arjuna, a System Information student from UIN Syarif Hidayatullah Jakarta with a keen interest in web development.
+        I'm particularly passionate about bridging the gap between static web pages and immersive 3D experiences, which led me to explore technologies like Three.js and GSAP.
+    `
+
+    const techStack = [
+        {
+            "name": "JavaScript",
+            "image": "/techstack/jsLogo.svg"
+        },
+        {
+            "name": "React",
+            "image": "/techstack/reactLogo.svg"
+        },
+        {
+            "name": "Next.js",
+            "image": "/techstack/nextLogo.svg"
+        },
+        {
+            "name": "Tailwind",
+            "image": "/techstack/tailwindLogo.svg"
+        },
+        {
+            "name": "Three.js",
+            "image": "/techstack/threeLogo.svg"
+        },
+        {
+            "name": "Node.js",
+            "image": "/techstack/nodeLogo.svg"
+        },
+        {
+            "name": "Express.js",
+            "image": "/techstack/expressLogo.svg"
+        },
+        {
+            "name": "Firebase",
+            "image": "/techstack/firebaseLogo.svg"
+        },
+        {
+            "name": "Vercel",
+            "image": "/techstack/vercelLogo.svg"
+        },
+    ]
+
+    if (!showComp && !showDoc) return null
+
+    if (showComp) {
+        return(
+            <div className="h-screen w-screen z-50 p-10 ">
+                <div className="h-full w-full bg-screen border-4 border-gray-600 grid grid-cols-3 p-5 gap-5 text-black">
+                    <div className="h-full w-full grid grid-rows-2 gap-5">
+                        <div className="h-full w-full flex items-center justify-center relative bg-screen-container rounded-4xl p-3">
+                            <Image src={"/selfPic.svg"} alt="Arjuna" fill/>
+                        </div>
+                        <div className="h-full w-full flex flex-col items-center justify-center gap-5">
+                            <h1 className="text-4xl font-bold text-center">Arjuna Ragil Putera</h1>
+                            <div className="h-full w-full flex flex-col p-5 gap-3">
+                                <div className="flex flex-row gap-3 items-center">
+                                    <MapPin />
+                                    <p className="text-lg">Jakarta, Indonesia</p>
+                                </div>
+                                <div className="flex flex-row gap-3 items-center">
+                                    <BriefcaseBusiness />
+                                    <h2 className="text-lg">Web Developer || Google Student Ambassador</h2>
+                                </div>
+                                <div className="flex flex-row gap-3 items-center">
+                                    <Phone />
+                                    <h2 className="text-lg">+62 812-1794-2843</h2>
+                                </div>
+                                <div className="flex flex-row gap-3 items-center">
+                                    <Mail />
+                                    <h2 className="text-lg">arjunaragilputera@gmail.com</h2>
+                                </div>
+                                <div className="flex flex-row items-center justify-center gap-3">
+                                    <a href="https://github.com/Arjuna-Ragil" className="rounded-full aspect-square bg-white hover:bg-neutral-200 duration-150 p-2 border-black border"><Github /></a>
+                                    <a href="https://github.com/Arjuna-Ragil" className="rounded-full aspect-square bg-white hover:bg-neutral-200 duration-150 p-2 border-black border"><Linkedin /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="h-full w-full col-span-2 bg-screen-container rounded-4xl p-5 gap-3 flex flex-col">
+                        <h2 className="text-xl font-medium">Helloo...</h2>
+                        <p className="text-justify">{shortDesc}</p>
+                        <div className="h-full w-full flex flex-col gap-3">
+                            <h3 className="text-xl font-medium">My Tech-Stack:</h3>
+                            <div className="h-full w-full grid grid-cols-3 gap-3">
+                                {techStack.map((tech) => (
+                                    <div key={tech.name} className="h-full w-full flex flex-col items-center justify-center bg-white rounded-4xl p-3">
+                                        <div className="h-full w-auto aspect-square relative">
+                                            <Image src={tech.image} alt={tech.name} fill/>
+                                        </div>
+                                        <p>{tech.name}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }   
+
+    if (showDoc) {
+        return(
+            <div>
+                test
+            </div>
+        )
+    }
+}
