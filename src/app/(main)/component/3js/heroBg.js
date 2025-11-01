@@ -13,6 +13,11 @@ export default function HeroBg(){
     const { setShowWindow, setShowConsole } = useWindow()
 
     useEffect(() => {
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
         let camera, scene, canvas, renderer, animationFrameId, control
         let cameraPivot
         let startPositionZ = 5
