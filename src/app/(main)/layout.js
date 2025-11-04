@@ -1,6 +1,4 @@
 import "../globals.css";
-import { ProfileProvider } from "./hook/useProfile";
-import { WindowProvider } from "./hook/useWindow";
 
 export const metadata = {
   title: "Juna Space Port",
@@ -11,11 +9,7 @@ export default function MainLayout({ children }){
     return(
         <html lang="en">
             <body className="h-full w-full overflow-x-hidden bg-black">
-                <WindowProvider>
-                    <ProfileProvider>
-                        {children}
-                    </ProfileProvider>
-                </WindowProvider>
+                {children}
             </body>
         </html>
     )

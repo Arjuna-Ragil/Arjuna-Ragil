@@ -1,9 +1,4 @@
-'use client'
-
-import { useWindow } from "../hook/useWindow"
-
 export default function Navbar(){
-    const { showWindow } = useWindow()
 
     const navs = [
         {
@@ -25,7 +20,7 @@ export default function Navbar(){
     ]
 
     return(
-        <div className={`${showWindow ? "opacity-100" : "opacity-0"} duration-200 w-full h-fit top-3 fixed px-30 z-50`}>
+        <div className={`duration-200 w-full h-fit top-3 fixed px-30 z-50 text-white`}>
             <div className="w-full h-fit bg-gray-800/20 backdrop-blur-sm rounded-full border border-white flex flex-row items-center justify-between p-2 px-10">
                 <div className="flex flex-row gap-5">
                     {navs.map((nav) => (
