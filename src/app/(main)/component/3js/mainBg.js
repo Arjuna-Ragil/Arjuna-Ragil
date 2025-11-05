@@ -7,22 +7,24 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import Navbar from "../navbar";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default function MainBg(){
     const canvasRef = useRef(null)
     const [isLoading, setIsLoading] = useState(true);
     const [loadProgress, setLoadProgress] = useState(0);
+    const [timeline, setTimeline] = useState(null)
 
-    useEffect(() => {
+    useEffect(() => { 
         if (history.scrollRestoration) {
             history.scrollRestoration = 'manual';
         }
         window.scrollTo(0, 0);
 
-        let camera, scene, canvas, renderer, animationFrameId, control
-        let startPositionX = -40
+        let camera, scene, canvas, renderer, animationFrameId, control, tl
 
         const init = () => {
             const loadingManager = new THREE.LoadingManager();
@@ -30,15 +32,17 @@ export default function MainBg(){
             loadingManager.onLoad = () => {
                 setIsLoading(false);
 
-                const tl = gsap.timeline()
+                tl = gsap.timeline()
 
                 ScrollTrigger.create({
                     animation: tl,    
                     trigger: "body",
                     start: "top top",    
                     end: "bottom bottom",  
-                    scrub: 0              
+                    scrub: 0.25      
                 });
+
+                tl.addLabel("title");
 
                 tl.to(camera.position, {
                     x: "33",
@@ -53,6 +57,7 @@ export default function MainBg(){
                     y: "0",
                     duration: 1,
                 }, "<")
+                tl.addLabel("content")
 
                 tl.to(camera.position, {
                     x: "28",
@@ -67,6 +72,7 @@ export default function MainBg(){
                     y: "0",
                     duration: 2,
                 }, "<")
+                tl.addLabel("mercury")
 
                 tl.to(camera.position, {
                     x: "37",
@@ -74,6 +80,7 @@ export default function MainBg(){
                     y: "0",
                     duration: 3,
                 })
+                tl.addLabel("venus")
 
                 tl.to(camera.position, {
                     x: "51",
@@ -81,6 +88,7 @@ export default function MainBg(){
                     y: "0",
                     duration: 4,
                 })
+                tl.addLabel("earth")
 
                 tl.to(camera.position, {
                     x: "47",
@@ -88,6 +96,7 @@ export default function MainBg(){
                     y: "0",
                     duration: 5,
                 })
+                tl.addLabel("mars")
 
                 tl.to(camera.position, {
                     x: "80",
@@ -95,6 +104,7 @@ export default function MainBg(){
                     y: "0",
                     duration: 6,
                 })
+                tl.addLabel("jupiter")
 
                 tl.to(camera.position, {
                     x: "100",
@@ -102,6 +112,7 @@ export default function MainBg(){
                     y: "0",
                     duration: 7,
                 })
+                tl.addLabel("saturn")
 
                 tl.to(camera.position, {
                     x: "110",
@@ -109,13 +120,15 @@ export default function MainBg(){
                     y: "0",
                     duration: 8,
                 })
+                tl.addLabel("uranus")
 
                 tl.to(camera.position, {
-                    x: "130",
+                    x: "135",
                     z: "13",
                     y: "0",
                     duration: 9,
                 })
+                tl.addLabel("neptune")
 
                 tl.to(camera.position, {
                     x: "127",
@@ -123,6 +136,8 @@ export default function MainBg(){
                     y: "0",
                     duration: 10,
                 })
+
+                setTimeline(tl);
             };
 
             loadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
@@ -136,7 +151,7 @@ export default function MainBg(){
 
             scene = new THREE.Scene()
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / innerHeight, 0.1, 1000)
-            camera.position.set(startPositionX, 2, 0)
+            camera.position.set(-50, 32, 0)
             
             canvas = canvasRef.current
             renderer = new THREE.WebGLRenderer({ canvas, antialias: true})
@@ -221,25 +236,20 @@ export default function MainBg(){
             
         }
 
+        function showInfo(id) {
+            // Sembunyikan dulu semua info lain (biar aman)
+            gsap.to(".portfolio-info", { opacity: 0, duration: 0.25 }); 
+
+            // Tampilkan info yang spesifik
+            gsap.to(`#${id}`, { opacity: 1, duration: 0.5, delay: 0.5 });
+        }
+
         const handleResize = () => {
             if (!camera || !renderer) return;
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         };
-
-        const zoomOut = () => {
-            if(camera.position.x === startPositionX) {
-                const tl = gsap.timeline()
-
-                tl.to(camera.position, {
-                    x: "-= 10",
-                    y: "+= 30",
-                    duration: 3,
-                    ease: "power2.inOut",
-                })
-            }
-        }
 
         const lookAtTarget = new THREE.Vector3(0, 32, 0);
 
@@ -254,11 +264,16 @@ export default function MainBg(){
         window.addEventListener("resize", handleResize)
         init()
         animate()
-        zoomOut()
 
         return () => {
             window.removeEventListener('resize', handleResize);
             cancelAnimationFrame(animationFrameId);
+            if (tl) {
+                if (tl.scrollTrigger) {
+                    tl.scrollTrigger.kill();
+                }
+                tl.kill();
+            }
         };
     }, [])
     
@@ -272,6 +287,7 @@ export default function MainBg(){
                 </div>
             )} 
 
+            <Navbar timeline={timeline}/>
             <canvas ref={canvasRef} className={`h-screen w-screen -z-50 fixed ${isLoading ? 'opacity-0' : 'opacity-100'}`}/>
         </>
     )
