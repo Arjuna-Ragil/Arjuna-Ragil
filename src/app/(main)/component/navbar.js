@@ -49,8 +49,8 @@ export default function Navbar({ timeline }){
     };
 
     return(
-        <div className={`duration-200 w-full h-fit top-3 fixed px-30 z-40 text-white`}>
-            <div className="w-full h-fit bg-gray-800/20 backdrop-blur-sm rounded-full border border-white flex flex-row items-center justify-between p-2 px-10">
+        <div className={`duration-200 h-fit top-3 fixed flex self-center justify-self-center px-30 z-40 text-white`}>
+            <div className="w-full h-fit bg-gray-800/20 backdrop-blur-sm rounded-full border border-white flex flex-row gap-10 items-center justify-between p-2 px-5">
                 <div className="flex flex-row gap-5">
                     {navs.map((nav) => (
                         <button onClick={() => handleNavClick(nav.id)} key={nav.name} className="hover:border-b border-white">

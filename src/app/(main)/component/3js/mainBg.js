@@ -31,111 +31,42 @@ export default function MainBg(){
 
             loadingManager.onLoad = () => {
                 setIsLoading(false);
-
                 tl = gsap.timeline()
 
-                ScrollTrigger.create({
-                    animation: tl,    
-                    trigger: "body",
-                    start: "top top",    
-                    end: "bottom bottom",  
-                    scrub: 0.25      
-                });
+                ScrollTrigger.create({ animation: tl, trigger: "body", start: "top top", end: "bottom bottom", scrub: 0.25 });
 
                 tl.addLabel("title");
 
-                tl.to(camera.position, {
-                    x: "33",
-                    z: "57",
-                    y: "0",
-                    duration: 1,
-                })
-
-                tl.to(lookAtTarget, {
-                    x: "50",
-                    z: "0",
-                    y: "0",
-                    duration: 1,
-                }, "<")
+                tl.to(camera.position, { x: "33", z: "57", y: "0", duration: 5 })
+                tl.to(lookAtTarget, { x: "50", z: "0", y: "20", duration: 5 }, "<")
                 tl.addLabel("content")
 
-                tl.to(camera.position, {
-                    x: "28",
-                    z: "1.5",
-                    y: "0",
-                    duration: 2,
-                })
-
-                tl.to(lookAtTarget, {
-                    x: "20",
-                    z: "0",
-                    y: "0",
-                    duration: 2,
-                }, "<")
+                tl.to(camera.position, { x: "28", z: "1.5", y: "0", duration: 5 })
+                tl.to(lookAtTarget, { x: "20", z: "0", y: "0", duration: 5 }, "<")
                 tl.addLabel("mercury")
 
-                tl.to(camera.position, {
-                    x: "37",
-                    z: "-9",
-                    y: "0",
-                    duration: 3,
-                })
+                tl.to(camera.position, { x: "37", z: "-9", y: "0", duration: 5 })
                 tl.addLabel("venus")
 
-                tl.to(camera.position, {
-                    x: "51",
-                    z: "-22",
-                    y: "0",
-                    duration: 4,
-                })
+                tl.to(camera.position, { x: "51", z: "-22", y: "0", duration: 5 })
                 tl.addLabel("earth")
 
-                tl.to(camera.position, {
-                    x: "47",
-                    z: "24",
-                    y: "0",
-                    duration: 5,
-                })
+                tl.to(camera.position, { x: "47", z: "24", y: "0", duration: 5 })
                 tl.addLabel("mars")
 
-                tl.to(camera.position, {
-                    x: "80",
-                    z: "-0.5",
-                    y: "0",
-                    duration: 6,
-                })
+                tl.to(camera.position, { x: "80", z: "-0.5", y: "0", duration: 5 })
                 tl.addLabel("jupiter")
 
-                tl.to(camera.position, {
-                    x: "100",
-                    z: "-13",
-                    y: "0",
-                    duration: 7,
-                })
+                tl.to(camera.position, { x: "100", z: "-13", y: "0", duration: 5 })
                 tl.addLabel("saturn")
 
-                tl.to(camera.position, {
-                    x: "110",
-                    z: "-5",
-                    y: "0",
-                    duration: 8,
-                })
+                tl.to(camera.position, { x: "110", z: "-5", y: "0", duration: 5 })
                 tl.addLabel("uranus")
 
-                tl.to(camera.position, {
-                    x: "135",
-                    z: "13",
-                    y: "0",
-                    duration: 9,
-                })
+                tl.to(camera.position, { x: "135", z: "13", y: "0", duration: 5 })
                 tl.addLabel("neptune")
 
-                tl.to(camera.position, {
-                    x: "127",
-                    z: "13",
-                    y: "0",
-                    duration: 10,
-                })
+                tl.to(camera.position, { x: "127", z: "13", y: "0", duration: 5 })
 
                 setTimeline(tl);
             };
@@ -234,14 +165,6 @@ export default function MainBg(){
 
             Array(200).fill().forEach(addStar)
             
-        }
-
-        function showInfo(id) {
-            // Sembunyikan dulu semua info lain (biar aman)
-            gsap.to(".portfolio-info", { opacity: 0, duration: 0.25 }); 
-
-            // Tampilkan info yang spesifik
-            gsap.to(`#${id}`, { opacity: 1, duration: 0.5, delay: 0.5 });
         }
 
         const handleResize = () => {
