@@ -1,6 +1,6 @@
 import MainBg from "./component/3js/mainBg";
 import Exp from "./component/exp";
-import Filler from "./component/filler";
+import Footer from "./component/footer";
 import Home from "./component/home";
 import Profile from "./component/profile";
 import Projects from "./component/projects";
@@ -21,7 +21,7 @@ export default function Main(){
             <Projects type={1}/>
             <Projects type={2}/>
             <Projects type={3}/>
-            <Filler/>
+            <Footer/>
         </>
     )
 }

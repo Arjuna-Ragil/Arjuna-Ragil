@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react"
 import * as THREE from 'three';
 import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader.js';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -25,6 +24,7 @@ export default function MainBg(){
         window.scrollTo(0, 0);
 
         let camera, scene, canvas, renderer, animationFrameId, control, tl
+        let sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune
 
         const init = () => {
             const loadingManager = new THREE.LoadingManager();
@@ -67,8 +67,6 @@ export default function MainBg(){
             renderer.setSize(window.innerWidth, window.innerHeight)
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-            //control = new OrbitControls(camera, renderer.domElement)
-
             const ambientLight = new THREE.AmbientLight(0x404040, 2);
             scene.add(ambientLight);
 
@@ -87,47 +85,47 @@ export default function MainBg(){
             const gltfLoader = new GLTFLoader(loadingManager)
 
             gltfLoader.load('/3js/sun.glb', (gltf) => {
-                const sun = gltf.scene
+                sun = gltf.scene
                 scene.add(sun)
             })
 
             gltfLoader.load('/3js/mercury.glb', (gltf) => {
-                const mercury = gltf.scene
+                mercury = gltf.scene
                 scene.add(mercury)
             })
 
             gltfLoader.load('/3js/venus.glb', (gltf) => {
-                const venus = gltf.scene
+                venus = gltf.scene
                 scene.add(venus)
             })
 
             gltfLoader.load('/3js/earth.glb', (gltf) => {
-                const earth = gltf.scene
+                earth = gltf.scene
                 scene.add(earth)
             })
 
             gltfLoader.load('/3js/mars.glb', (gltf) => {
-                const mars = gltf.scene
+                mars = gltf.scene
                 scene.add(mars)
             })
 
             gltfLoader.load('/3js/jupiter.glb', (gltf) => {
-                const jupiter = gltf.scene
+                jupiter = gltf.scene
                 scene.add(jupiter)
             })
 
             gltfLoader.load('/3js/saturn.glb', (gltf) => {
-                const saturn = gltf.scene
+                saturn = gltf.scene
                 scene.add(saturn)
             })
 
             gltfLoader.load('/3js/uranus.glb', (gltf) => {
-                const uranus = gltf.scene
+                uranus = gltf.scene
                 scene.add(uranus)
             })
 
             gltfLoader.load('/3js/neptune.glb', (gltf) => {
-                const neptune = gltf.scene
+                neptune = gltf.scene
                 scene.add(neptune)
             })
 
@@ -143,6 +141,8 @@ export default function MainBg(){
 
             Array(200).fill().forEach(addStar)
             
+            const textureLoader = new THREE.TextureLoader(loadingManager);
+            
         }
 
         const handleResize = () => {
@@ -157,9 +157,17 @@ export default function MainBg(){
         const animate = () => {
             renderer.render(scene, camera)
             animationFrameId = requestAnimationFrame(animate)
-            //control.update() //orbit control
-
             camera.lookAt(lookAtTarget);
+
+            if (sun) sun.children[0].rotation.z += 0.0009
+            if (mercury) mercury.children[0].rotation.z += 0.0005;
+            if (venus) venus.children[0].rotation.z += 0.00001;
+            if (earth) earth.children[0].rotation.z += 0.001;
+            if (mars) mars.children[0].rotation.z += 0.001;
+            if (jupiter) jupiter.children[0].rotation.z += 0.002;
+            if (saturn) saturn.children[0].rotation.z += 0.0022;
+            if (uranus) uranus.children[0].rotation.z += 0.0012;
+            if (neptune) neptune.children[0].rotation.z += 0.0013;
         }
         
         window.addEventListener("resize", handleResize)

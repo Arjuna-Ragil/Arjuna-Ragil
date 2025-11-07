@@ -64,7 +64,7 @@ export default function Projects({type}){
                         <h1 className="text-3xl font-bold text-center">Demokratos</h1>
                         <Image src={"/project/demoLogo.svg"} alt="Logo" height={50} width={50}/>
                     </div>
-                    <div className="md:h-50 h-30 w-auto aspect-video relative flex items-center justify-center">
+                    <div className="lg:h-50 h-30 w-auto aspect-video relative flex items-center justify-center">
                         <Image src={"/project/demoDoc.svg"} alt="Logo" fill/>
                     </div>
                     <p className="text-xl md:text-justify">A web-based platform powered by Gemini AI that helps governments analyze public needs and aspirations.</p>
@@ -95,7 +95,7 @@ export default function Projects({type}){
                         <h1 className="text-3xl font-bold text-center">Planix</h1>
                         <Image src={"/project/planLogo.svg"} alt="Logo" height={50} width={50}/>
                     </div>
-                    <div className="md:h-50 h-30 w-auto aspect-video relative flex items-center justify-center">
+                    <div className="lg:h-50 h-30 w-auto aspect-video relative flex items-center justify-center">
                         <Image src={"/project/planDoc.svg"} alt="Logo" fill/>
                     </div>
                     <p className="text-xl md:text-justify">A web-based application that leverages AI (Gemini) and real-time spatial data to support urban planning and land-use analysis.</p>
@@ -126,7 +126,7 @@ export default function Projects({type}){
                         <h1 className="text-3xl font-bold text-center">PicPrice</h1>
                         <Image src={"/project/ppLogo.svg"} alt="Logo" height={50} width={50}/>
                     </div>
-                    <div className="md:h-50 h-30 w-auto aspect-video relative flex items-center justify-center">
+                    <div className="lg:h-50 h-30 w-auto aspect-video relative flex items-center justify-center">
                         <Image src={"/project/ppDoc.svg"} alt="Logo" fill/>
                     </div>
                     <p className="text-xl md:text-justify">AI-powered web application that allows users to upload or take a picture of a product and instantly search for its average price across multiple online platforms.</p>
