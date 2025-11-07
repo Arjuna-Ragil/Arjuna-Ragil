@@ -15,7 +15,7 @@ export default function Profile({type}){
             <div className="min-h-screen h-full w-full flex items-center justify-center md:grid grid-cols-2 p-10" id="mercury">
                 <div className="flex text-white flex-col gap-5 self-center items-center justify-center bg-gray-400/10 border border-white backdrop-blur-sm rounded-2xl p-5">
                     <h1 className="text-3xl font-bold text-center">My Profile</h1>
-                    <div className="h-[33dvh] w-auto aspect-square relative">
+                    <div className="md:h-50 h-30 w-auto aspect-square relative">
                         <Image src={"/selfPic.svg"} alt="Me..." fill/>
                     </div>
                     <h2 className="text-3xl font-medium text-center">Arjuna Ragil Putera</h2>

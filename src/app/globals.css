@@ -1,33 +1,5 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
-@theme{
-  --color-screen: #e0f9ff;
-  --color-screen-container: #97ebff;
-
-  --animate-height: Height 1s ease-in-out;
-  --animate-pulseV2: PulseV2 2s linear infinite;
-
-  @keyframes Height {
-    0% {
-        transform: scaleY(0)
-    }
-    100% {
-        transform: scaleY(1)
-    }
-  }
-
-  @keyframes PulseV2 {
-    0% {
-        opacity: 70%
-    }
-    100% {
-        opacity: 100%
-    }
-  }
-}
-
 html {
     scroll-behavior: smooth;
 }

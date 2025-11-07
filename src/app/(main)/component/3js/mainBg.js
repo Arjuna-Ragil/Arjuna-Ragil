@@ -142,7 +142,7 @@ export default function MainBg(){
             Array(200).fill().forEach(addStar)
             
             const textureLoader = new THREE.TextureLoader(loadingManager);
-            
+
         }
 
         const handleResize = () => {
@@ -190,7 +190,7 @@ export default function MainBg(){
     return(
         <>
             {isLoading && (
-                <div className="absolute top-0 left-0 h-screen w-full flex flex-col items-center justify-center bg-black z-50">
+                <div className="fixed top-0 left-0 h-screen w-full flex flex-col items-center justify-center bg-black z-50">
                     <p className="text-white text-2xl">Loading...</p>
                     <p className="text-white mt-2">{Math.round(loadProgress * 100)}%</p>
                 </div>
