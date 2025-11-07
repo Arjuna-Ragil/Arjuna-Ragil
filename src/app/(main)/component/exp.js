@@ -2,11 +2,11 @@ import Image from "next/image";
 
 export default function Exp(){
     return(
-        <div className="h-screen w-full flex items-center justify-center p-10">
-            <div className="h-full flex text-white flex-col gap-5 self-center items-center justify-center bg-gray-400/10 border border-white backdrop-blur-sm rounded-2xl p-10">
+        <div className="min-h-screen h-full w-full flex items-center justify-center p-3 py-13" id="jupiter">
+            <div className="h-full flex text-white flex-col gap-5 items-center justify-center bg-gray-400/10 border border-white backdrop-blur-sm rounded-2xl md:p-10 py-3">
                 <h2 className="text-3xl font-medium text-center">My Experience</h2>
-                <div className="h-full w-full flex flex-col items-center justify-evenly text-center p-5 gap-5 rounded-2xl">
-                    <div className="h-full w-auto aspect-square relative">
+                <div className="h-full w-full flex flex-col items-center justify-evenly text-center md:p-5 gap-5 rounded-2xl">
+                    <div className="h-30 w-auto aspect-square relative">
                         <Image src="/GSALogo.svg" alt="GSA" fill/>
                     </div>
                     <h2 className="text-2xl font-medium">Google Student Ambassador (2025)</h2>

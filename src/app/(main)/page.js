@@ -3,6 +3,7 @@ import Exp from "./component/exp";
 import Filler from "./component/filler";
 import Home from "./component/home";
 import Profile from "./component/profile";
+import Projects from "./component/projects";
 import TechStack from "./component/techstack";
 import Title from "./component/title";
 
@@ -17,9 +18,9 @@ export default function Main(){
             <Profile type={3}/>
             <TechStack/>
             <Exp/>
-            <Filler/>
-            <Filler/>
-            <Filler/>
+            <Projects type={1}/>
+            <Projects type={2}/>
+            <Projects type={3}/>
             <Filler/>
         </>
     )

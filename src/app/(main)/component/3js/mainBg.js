@@ -32,42 +32,20 @@ export default function MainBg(){
             loadingManager.onLoad = () => {
                 setIsLoading(false);
                 tl = gsap.timeline()
-
                 ScrollTrigger.create({ animation: tl, trigger: "body", start: "top top", end: "bottom bottom", scrub: 0.25 });
 
-                tl.addLabel("title");
-
-                tl.to(camera.position, { x: "33", z: "57", y: "0", duration: 5 })
-                tl.to(lookAtTarget, { x: "50", z: "0", y: "20", duration: 5 }, "<")
-                tl.addLabel("content")
-
-                tl.to(camera.position, { x: "28", z: "1.5", y: "0", duration: 5 })
+                tl.to(camera.position, { x: "33", z: "57", y: "0", duration: 5 }) //home
+                tl.to(lookAtTarget, { x: "50", z: "0", y: "20", duration: 5 }, "<") 
+                tl.to(camera.position, { x: "28", z: "1.5", y: "0", duration: 5 }) //mercury
                 tl.to(lookAtTarget, { x: "20", z: "0", y: "0", duration: 5 }, "<")
-                tl.addLabel("mercury")
-
-                tl.to(camera.position, { x: "37", z: "-9", y: "0", duration: 5 })
-                tl.addLabel("venus")
-
-                tl.to(camera.position, { x: "51", z: "-22", y: "0", duration: 5 })
-                tl.addLabel("earth")
-
-                tl.to(camera.position, { x: "47", z: "24", y: "0", duration: 5 })
-                tl.addLabel("mars")
-
-                tl.to(camera.position, { x: "80", z: "-0.5", y: "0", duration: 5 })
-                tl.addLabel("jupiter")
-
-                tl.to(camera.position, { x: "100", z: "-13", y: "0", duration: 5 })
-                tl.addLabel("saturn")
-
-                tl.to(camera.position, { x: "110", z: "-5", y: "0", duration: 5 })
-                tl.addLabel("uranus")
-
-                tl.to(camera.position, { x: "135", z: "13", y: "0", duration: 5 })
-                tl.addLabel("neptune")
-
-                tl.to(camera.position, { x: "127", z: "13", y: "0", duration: 5 })
-
+                tl.to(camera.position, { x: "37", z: "-9", y: "0", duration: 5 }) //venus
+                tl.to(camera.position, { x: "51", z: "-22", y: "0", duration: 5 }) // earth
+                tl.to(camera.position, { x: "47", z: "24", y: "0", duration: 5 }) // mars
+                tl.to(camera.position, { x: "80", z: "-0.5", y: "0", duration: 5 }) // jupiter
+                tl.to(camera.position, { x: "100", z: "-13", y: "0", duration: 5 }) // saturn
+                tl.to(camera.position, { x: "110", z: "-5", y: "0", duration: 5 }) // uranus
+                tl.to(camera.position, { x: "135", z: "13", y: "0", duration: 5 }) // neptune
+                tl.to(camera.position, { x: "127", z: "13", y: "0", duration: 5 }) // footer
                 setTimeline(tl);
             };
 
