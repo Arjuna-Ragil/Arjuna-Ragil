@@ -2,7 +2,7 @@
 <div align="center">
   <img height="200" src="https://media1.tenor.com/m/kkSR7zQfUQgAAAAC/kyaru-priconne.gif"  />
 </div>
-<h3 align="center">A Student with an Interest in Software Engineering & Coffee</h3>
+<h3 align="center">Information Systems Student @ UIN Jakarta | Fullstack Developer (React, Golang, Postgres) | Google Student Ambassador</h3>
 
 ###
 
