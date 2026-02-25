@@ -29,6 +29,11 @@ func main() {
 		log.Fatalf("failed to migrate database: %v", err)
 	}
 
+	bucket, err := repository.InitBucket()
+	if err != nil {
+		log.Fatalf("failed to connect to bucket: %v", err)
+	}
+
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{
@@ -38,7 +43,7 @@ func main() {
 		AllowCredentials: true,
 	}))
 
-	deps := SetupApp(db)
+	deps := SetupApp(db, bucket)
 
 	routes.SetupV1Routes(r, deps)
 
@@ -48,8 +53,8 @@ func main() {
 	}
 }
 
-func SetupApp(db *repository.DB) routes.Deps{
-	tsRepo := repository.NewTSRepo(db)
+func SetupApp(db *repository.DB, bucket *repository.Bucket) routes.Deps{
+	tsRepo := repository.NewTSRepo(db, bucket)
 	tsService := services.NewTSService(tsRepo)
 	tsHandler := handlers.NewTSHandler(tsService)
 

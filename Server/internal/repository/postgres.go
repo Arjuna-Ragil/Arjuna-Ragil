@@ -28,6 +28,10 @@ func ConnectDB() (*DB, error) {
 func (db *DB) Migrate() error {
 	err := db.gorm.AutoMigrate(
 		&domains.TechStack{},
+		&domains.Exp{},
+		&domains.Project{},
+		&domains.ProjectTS{},
+		&domains.Task{},
 	)
 
 	if err != nil {

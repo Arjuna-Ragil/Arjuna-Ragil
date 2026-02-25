@@ -44,4 +44,4 @@ next-env.d.ts
 stitch_assets
 s3_config.json
 docker-compose.override.yml
-
+.idea

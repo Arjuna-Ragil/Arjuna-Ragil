@@ -1,13 +1,22 @@
 package repository
 
-import "github.com/Arjuna-Ragil/Arjuna-Ragil/internal/core/domains"
+import (
+	"mime/multipart"
+
+	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal/core/domains"
+)
 
 type TSRepo struct {
 	DB *DB
+	Bucket *Bucket
 }
 
-func NewTSRepo(db *DB) *TSRepo {
-	return &TSRepo{DB: db}
+func NewTSRepo(db *DB, bucket *Bucket) *TSRepo {
+	return &TSRepo{DB: db, Bucket: bucket}
+}
+
+func (repo *TSRepo) Upload(file *multipart.FileHeader) (string, error) {
+	return repo.Bucket.UploadFile(file, "tech-stack")
 }
 
 func (repo *TSRepo) Create(ts *domains.TechStack) error {

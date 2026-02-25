@@ -16,11 +16,16 @@ func NewTSHandler(tsService *services.TSService) *TSHandler{
 
 func (handler *TSHandler) AddTS(c *gin.Context){
 	var input services.TSInput
-	if err := c.ShouldBindJSON(&input); err != nil {
+	if err := c.ShouldBind(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	if err := handler.TSService.AddTS(input); err != nil {
+	icon, err := c.FormFile("icon")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if err := handler.TSService.AddTS(input, icon); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}

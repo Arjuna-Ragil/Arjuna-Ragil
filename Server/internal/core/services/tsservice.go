@@ -1,6 +1,8 @@
 package services
 
 import (
+	"mime/multipart"
+
 	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal/core/domains"
 	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal/repository"
 )
@@ -15,16 +17,19 @@ func NewTSService(tsRepo *repository.TSRepo) *TSService{
 
 type TSInput struct{
 	ID uint `json:"id"`
-	Name string `json:"name"`
+	Name string `json:"name" binding:"required"`
 	Icon string `json:"icon"`
 }
 
-func (Serv *TSService) AddTS(input TSInput) error {
+func (Serv *TSService) AddTS(input TSInput, icon *multipart.FileHeader) error {
+	iconURL, err := Serv.TSRepo.Upload(icon)
+	if err != nil {
+		return err
+	}
 	TSInfo := domains.TechStack{
 		Name: input.Name,
-		Icon: input.Icon,
+		Icon: iconURL,
 	}
-
 	if err := Serv.TSRepo.Create(&TSInfo); err != nil {
 		return err
 	}
@@ -43,7 +48,6 @@ func (Serv *TSService) UpdateTS(input TSInput) error {
 		return err
 	}
 	TS.Name = input.Name
-	TS.Icon = input.Icon
 	if err := Serv.TSRepo.Update(&TS); err != nil {
 		return err
 	}

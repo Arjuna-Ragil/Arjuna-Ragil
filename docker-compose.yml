@@ -41,7 +41,7 @@ services:
     ports:
       - "127.0.0.1:8335:8333"
       - "127.0.0.1:8890:8888"
-    command: "server -s3 -filer -s3.port=8335 -filer.port=8890 -master.volumeSizeLimitMB=1024 -volume.max=100 -s3.config=/etc/seaweedfs/s3_config.json"
+    command: "server -s3 -filer -master.volumeSizeLimitMB=1024 -volume.max=100 -s3.config=/etc/seaweedfs/s3_config.json"
     volumes:
       - seaweed_data:/data
       - ./seaweedfs_config/s3_config.json:/etc/seaweedfs/s3_config.json
