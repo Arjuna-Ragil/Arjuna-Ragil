@@ -40,4 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Extra
 stitch_assets
+s3_config.json
+docker-compose.override.yml
+

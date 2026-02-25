@@ -1,0 +1,58 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: PortoDB
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD} 
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - porto_network
+  
+  backend:
+    build: ./Server
+    container_name: PortoBE
+    restart: unless-stopped
+    ports:
+      - "8082:8080"
+    networks:
+      - porto_network
+    depends_on:
+      - db
+  
+  frontend:
+    build: ./UI
+    container_name: PortoFE
+    restart: unless-stopped
+    ports:
+      - "3002:80"
+    depends_on:
+      - backend
+    networks:
+      - porto_network
+
+  seaweedfs:
+    image: chrislusf/seaweedfs
+    container_name: PortoBucket
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8335:8333"
+      - "127.0.0.1:8890:8888"
+    command: "server -s3 -filer -s3.port=8335 -filer.port=8890 -master.volumeSizeLimitMB=1024 -volume.max=100 -s3.config=/etc/seaweedfs/s3_config.json"
+    volumes:
+      - seaweed_data:/data
+      - ./seaweedfs_config/s3_config.json:/etc/seaweedfs/s3_config.json
+    networks:
+      - porto_network
+
+volumes:
+  pg_data:
+  seaweed_data:
+
+networks:
+  porto_network:
+    driver: bridge
+

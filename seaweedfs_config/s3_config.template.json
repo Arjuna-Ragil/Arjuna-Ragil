@@ -1,0 +1,18 @@
+{
+    "identities": [
+        {
+            "name": "Core-Life-Bucket",
+            "credentials": [
+                {
+                    "accessKey": "$BUCKET_ACCESS_KEY",
+                    "secretKey": "$BUCKET_SECRET_KEY"
+                }
+            ],
+            "actions": [ "Read", "Write", "List", "Tagging", "Admin"]
+        },
+        {
+            "name": "anonymous",
+            "actions": [ "Read"]
+        }
+    ]
+}
