@@ -26,6 +26,7 @@ export default function AdminPage() {
     const [editTechId, setEditTechId] = useState(null);
     const [editTechName, setEditTechName] = useState("");
     const [editTechCategory, setEditTechCategory] = useState("");
+    const [editTechIcon, setEditTechIcon] = useState(null);
     const [editTechLoading, setEditTechLoading] = useState(false);
     const [editTechError, setEditTechError] = useState("");
 
@@ -149,6 +150,7 @@ export default function AdminPage() {
         setEditTechId(tech.id);
         setEditTechName(tech.name);
         setEditTechCategory(categoryKey === "Others" ? (tech.category || "") : tech.category);
+        setEditTechIcon(null);
         setEditTechError("");
         setIsEditTechModalOpen(true);
     };
@@ -166,14 +168,18 @@ export default function AdminPage() {
         setEditTechError("");
 
         try {
-            await axios.put("http://localhost:8080/api/v1/protected/ts/update", {
-                id: editTechId,
-                name: editTechName,
-                category: editTechCategory
-            }, {
+            const formData = new FormData();
+            formData.append("id", editTechId);
+            formData.append("name", editTechName);
+            formData.append("category", editTechCategory);
+            if (editTechIcon) {
+                formData.append("icon", editTechIcon);
+            }
+
+            await axios.put("http://localhost:8080/api/v1/protected/ts/update", formData, {
                 withCredentials: true,
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "multipart/form-data",
                 }
             });
 
@@ -848,6 +854,13 @@ export default function AdminPage() {
                                         type="text" value={editTechCategory} onChange={(e) => setEditTechCategory(e.target.value)}
                                         className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2.5 px-4 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all"
                                         placeholder="e.g. Frontend"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">New Icon Image</label>
+                                    <input
+                                        type="file" accept=".jpg,.jpeg,.png,.webp,.svg" onChange={(e) => setEditTechIcon(e.target.files[0])}
+                                        className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2 px-3 text-slate-100 text-sm file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-[#a855f7] file:text-white hover:file:bg-[#a855f7]/80 transition-all cursor-pointer"
                                     />
                                 </div>
                                 <button

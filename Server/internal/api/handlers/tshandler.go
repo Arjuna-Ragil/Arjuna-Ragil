@@ -44,11 +44,16 @@ func (handler *TSHandler) GetAllTS(c *gin.Context){
 
 func (handler *TSHandler) UpdateTS(c *gin.Context){
 	var input services.TSInput
-	if err := c.ShouldBindJSON(&input); err != nil {
+	if err := c.ShouldBind(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	if err := handler.TSService.UpdateTS(input); err != nil {
+	icon, err := c.FormFile("icon")
+	if err != nil && err != http.ErrMissingFile {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if err := handler.TSService.UpdateTS(input, icon); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}

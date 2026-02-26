@@ -50,9 +50,16 @@ func (Serv *TSService) GetAllTS() ([]domains.TechStack, error) {
 	return TS, nil
 }
 
-func (Serv *TSService) UpdateTS(input TSInput) error {
+func (Serv *TSService) UpdateTS(input TSInput, icon *multipart.FileHeader) error {
 	TS, err := Serv.TSRepo.GetByID(input.ID); if err != nil {
 		return err
+	}
+	if icon != nil {
+		iconURL, err := Serv.TSRepo.Upload(icon)
+		if err != nil {
+			return err
+		}
+		TS.Icon = iconURL
 	}
 	TS.Name = input.Name
 	TS.Category = input.Category
