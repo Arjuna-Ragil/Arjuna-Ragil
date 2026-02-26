@@ -11,6 +11,7 @@ type Deps struct {
 	Config *internal.Config
 	TS *handlers.TSHandler
 	Auth *handlers.AuthHandler
+	Exp *handlers.ExpHandler
 }
 
 func SetupV1Routes(r *gin.Engine, d Deps) {
@@ -20,6 +21,7 @@ func SetupV1Routes(r *gin.Engine, d Deps) {
 		{
 			open.POST("/login", d.Auth.Login)
 			open.GET("/ts", d.TS.GetAllTS)
+			open.GET("/exp", d.Exp.GetAllExp)
 		}
 
 		protected := v1.Group("/protected")
@@ -27,9 +29,15 @@ func SetupV1Routes(r *gin.Engine, d Deps) {
 		{
 			ts := protected.Group("/ts")
 			{
-				ts.POST("/", d.TS.AddTS)
-				ts.PUT("/", d.TS.UpdateTS)
-				ts.DELETE("/", d.TS.DeleteTS)
+				ts.POST("/add", d.TS.AddTS)
+				ts.PUT("/update", d.TS.UpdateTS)
+				ts.DELETE("/delete/:id", d.TS.DeleteTS)
+			}
+			exp := protected.Group("/exp")
+			{
+				exp.POST("/add", d.Exp.AddNewExp)
+				exp.PUT("/update", d.Exp.UpdateExp)
+				exp.DELETE("/delete/:id", d.Exp.DeleteExp)
 			}
 		}
 	}

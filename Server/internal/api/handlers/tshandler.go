@@ -2,6 +2,8 @@ package handlers
 
 import (
 	"net/http"
+	"strconv"
+
 	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal/core/services"
 	"github.com/gin-gonic/gin"
 )
@@ -54,12 +56,12 @@ func (handler *TSHandler) UpdateTS(c *gin.Context){
 }
 
 func (handler *TSHandler) DeleteTS(c *gin.Context){
-	var input services.TSInput
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	id := c.Param("id")
+	idUint, err := strconv.Atoi(id); if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	if err := handler.TSService.DeleteTS(input); err != nil {
+	if err := handler.TSService.DeleteTS(uint(idUint)); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}

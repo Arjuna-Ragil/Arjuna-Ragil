@@ -61,9 +61,14 @@ func SetupApp(db *repository.DB, bucket *repository.Bucket, cfg *internal.Config
 	authService := services.NewAuthConfig(cfg)
 	authHandler := handlers.NewAuthHandler(*authService)
 
+	expRepo := repository.NewExpRepo(db, bucket)
+	expService := services.NewExpService(expRepo)
+	expHandler := handlers.NewExpHandler(expService)
+
 	return routes.Deps{
 		Config: cfg,
 		TS: tsHandler,
 		Auth: authHandler,
+		Exp: expHandler,
 	}
 }

@@ -4,6 +4,7 @@ type Exp struct {
 	ID uint `gorm:"primaryKey; autoIncrement" json:"id"`
 	Title string `gorm:"not null" json:"title"`
 	Description string `gorm:"not null" json:"description"`
+	Company string `gorm:"not null" json:"company"`
 	Period string `gorm:"not null" json:"period"`
 	Image string `gorm:"not null" json:"image"`
 	Tasks []Task `gorm:"foreignKey:ExpID" json:"tasks"`

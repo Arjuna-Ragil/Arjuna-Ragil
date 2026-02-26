@@ -1,6 +1,7 @@
 package services
 
 import (
+	"errors"
 	"mime/multipart"
 
 	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal/core/domains"
@@ -15,11 +16,11 @@ func NewTSService(tsRepo *repository.TSRepo) *TSService{
 	return &TSService{TSRepo: tsRepo}
 }
 
-type TSInput struct{
-	ID uint `json:"id"`
-	Name string `json:"name" binding:"required"`
-	Icon string `json:"icon"`
-	Category string `json:"category"`
+type TSInput struct {
+	ID       uint   `json:"id" form:"id"`
+	Name     string `json:"name" form:"name" binding:"required"`
+	Icon     string `json:"icon"`
+	Category string `json:"category" form:"category"`
 }
 
 func (Serv *TSService) AddTS(input TSInput, icon *multipart.FileHeader) error {
@@ -28,9 +29,13 @@ func (Serv *TSService) AddTS(input TSInput, icon *multipart.FileHeader) error {
 		return err
 	}
 	TSInfo := domains.TechStack{
-		Name: input.Name,
-		Icon: iconURL,
+		Name:     input.Name,
+		Icon:     iconURL,
 		Category: input.Category,
+	}
+
+	if input.Name == "" {
+		return errors.New("name is required")
 	}
 	if err := Serv.TSRepo.Create(&TSInfo); err != nil {
 		return err
@@ -50,14 +55,15 @@ func (Serv *TSService) UpdateTS(input TSInput) error {
 		return err
 	}
 	TS.Name = input.Name
+	TS.Category = input.Category
 	if err := Serv.TSRepo.Update(&TS); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (Serv *TSService) DeleteTS(input TSInput) error {
-	if err := Serv.TSRepo.Delete(input.ID); err != nil {
+func (Serv *TSService) DeleteTS(id uint) error {
+	if err := Serv.TSRepo.Delete(id); err != nil {
 		return err
 	}
 	return nil
