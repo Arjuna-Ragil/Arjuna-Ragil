@@ -12,6 +12,7 @@ type Deps struct {
 	TS *handlers.TSHandler
 	Auth *handlers.AuthHandler
 	Exp *handlers.ExpHandler
+	PJ *handlers.PjHandler
 }
 
 func SetupV1Routes(r *gin.Engine, d Deps) {
@@ -22,6 +23,7 @@ func SetupV1Routes(r *gin.Engine, d Deps) {
 			open.POST("/login", d.Auth.Login)
 			open.GET("/ts", d.TS.GetAllTS)
 			open.GET("/exp", d.Exp.GetAllExp)
+			open.GET("/pj", d.PJ.GetAllPj)
 		}
 
 		protected := v1.Group("/protected")
@@ -38,6 +40,13 @@ func SetupV1Routes(r *gin.Engine, d Deps) {
 				exp.POST("/add", d.Exp.AddNewExp)
 				exp.PUT("/update", d.Exp.UpdateExp)
 				exp.DELETE("/delete/:id", d.Exp.DeleteExp)
+			}
+			pj := protected.Group("/pj")
+			{
+				pj.GET("/:id", d.PJ.GetPJ)
+				pj.POST("/add", d.PJ.AddPj)
+				pj.PUT("/update", d.PJ.UpdatePj)
+				pj.DELETE("/delete/:id", d.PJ.DeletePj)
 			}
 		}
 	}

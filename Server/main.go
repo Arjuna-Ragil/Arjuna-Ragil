@@ -65,10 +65,15 @@ func SetupApp(db *repository.DB, bucket *repository.Bucket, cfg *internal.Config
 	expService := services.NewExpService(expRepo)
 	expHandler := handlers.NewExpHandler(expService)
 
+	pjRepo := repository.NewPjRepo(db, bucket)
+	pjService := services.NewPjService(pjRepo, tsRepo)
+	pjHandler := handlers.NewPjHandler(pjService)
+
 	return routes.Deps{
 		Config: cfg,
 		TS: tsHandler,
 		Auth: authHandler,
 		Exp: expHandler,
+		PJ: pjHandler,
 	}
 }

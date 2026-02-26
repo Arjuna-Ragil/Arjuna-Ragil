@@ -30,7 +30,6 @@ func (db *DB) Migrate() error {
 		&domains.TechStack{},
 		&domains.Exp{},
 		&domains.Project{},
-		&domains.ProjectTS{},
 		&domains.Task{},
 	)
 

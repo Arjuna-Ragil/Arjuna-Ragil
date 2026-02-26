@@ -44,3 +44,9 @@ func (repo *TSRepo) Delete(id uint) error {
 	err := repo.DB.gorm.Delete(&domains.TechStack{}, id).Error
 	return err
 }
+
+func (repo *TSRepo) GetByIds(ids []uint) ([]domains.TechStack, error) {
+	var ts []domains.TechStack
+	err := repo.DB.gorm.Where("id IN ?", ids).Find(&ts).Error
+	return ts, err
+}
