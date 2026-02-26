@@ -8,6 +8,9 @@ import (
 
 type Config struct {
 	AppEnv string
+	Username string
+	Password string
+	SecretKey string
 	Port   string
 	DBURL  string
 }
@@ -19,6 +22,9 @@ func LoadConfig() Config {
 	}
 	return Config{
 		AppEnv:     getEnv("APP_ENV", "local"),
+		Username: getEnv("PORTO_ADMIN_USERNAME", ""),
+		Password: getEnv("PORTO_ADMIN_PASSWORD", ""),
+		SecretKey: getEnv("SECRET_KEY", "secret"),
 		Port:       getEnv("PORT", "8080"),
 		DBURL: "host=" + getEnv("DB_HOST", "localhost") +
 			" user=" + getEnv("DB_USER", "postgres") +

@@ -1,23 +1,36 @@
 package routes
 
 import (
+	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal"
 	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal/api/handlers"
+	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal/api/middlewares"
 	"github.com/gin-gonic/gin"
 )
 
 type Deps struct {
+	Config *internal.Config
 	TS *handlers.TSHandler
+	Auth *handlers.AuthHandler
 }
 
 func SetupV1Routes(r *gin.Engine, d Deps) {
 	v1 := r.Group("/api/v1")
 	{
-		tsv1 := v1.Group("/ts")
+		open := v1.Group("/open")
 		{
-			tsv1.POST("/add", d.TS.AddTS)
-			tsv1.GET("/get", d.TS.GetAllTS)
-			tsv1.PUT("/update", d.TS.UpdateTS)
-			tsv1.DELETE("/delete", d.TS.DeleteTS)
+			open.POST("/login", d.Auth.Login)
+			open.GET("/ts", d.TS.GetAllTS)
+		}
+
+		protected := v1.Group("/protected")
+		protected.Use(middlewares.AuthMiddleware(d.Config))
+		{
+			ts := protected.Group("/ts")
+			{
+				ts.POST("/", d.TS.AddTS)
+				ts.PUT("/", d.TS.UpdateTS)
+				ts.DELETE("/", d.TS.DeleteTS)
+			}
 		}
 	}
 }

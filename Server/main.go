@@ -43,7 +43,7 @@ func main() {
 		AllowCredentials: true,
 	}))
 
-	deps := SetupApp(db, bucket)
+	deps := SetupApp(db, bucket, &cfg)
 
 	routes.SetupV1Routes(r, deps)
 
@@ -53,12 +53,17 @@ func main() {
 	}
 }
 
-func SetupApp(db *repository.DB, bucket *repository.Bucket) routes.Deps{
+func SetupApp(db *repository.DB, bucket *repository.Bucket, cfg *internal.Config) routes.Deps{
 	tsRepo := repository.NewTSRepo(db, bucket)
 	tsService := services.NewTSService(tsRepo)
 	tsHandler := handlers.NewTSHandler(tsService)
 
+	authService := services.NewAuthConfig(cfg)
+	authHandler := handlers.NewAuthHandler(*authService)
+
 	return routes.Deps{
+		Config: cfg,
 		TS: tsHandler,
+		Auth: authHandler,
 	}
 }
