@@ -19,6 +19,7 @@ type TSInput struct{
 	ID uint `json:"id"`
 	Name string `json:"name" binding:"required"`
 	Icon string `json:"icon"`
+	Category string `json:"category"`
 }
 
 func (Serv *TSService) AddTS(input TSInput, icon *multipart.FileHeader) error {
@@ -29,6 +30,7 @@ func (Serv *TSService) AddTS(input TSInput, icon *multipart.FileHeader) error {
 	TSInfo := domains.TechStack{
 		Name: input.Name,
 		Icon: iconURL,
+		Category: input.Category,
 	}
 	if err := Serv.TSRepo.Create(&TSInfo); err != nil {
 		return err
