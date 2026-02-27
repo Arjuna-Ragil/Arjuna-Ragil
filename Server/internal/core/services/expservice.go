@@ -18,15 +18,22 @@ func NewExpService(expRepo *repository.ExpRepo) *ExpService {
 type ExpInput struct {
 	ID uint `json:"id" form:"id"`
 	Title string `json:"title" form:"title" binding:"required"`
-	Description string `json:"description" form:"description" binding:"required"`
+	Description string `json:"description" form:"description"`
 	Company string `json:"company" form:"company" binding:"required"`
-	Period string `json:"period" form:"period" binding:"required"`
+	Period string `json:"period" form:"period"`
 	Image string `json:"image"`
+	Tasks []string `json:"tasks" form:"tasks"`
 }
 
 func (s *ExpService) AddExp(input *ExpInput, image *multipart.FileHeader) error{
 	imageURL, err := s.ExpRepo.Upload(image); if err != nil {
 		return err
+	}
+	var tasks []domains.Task
+	for _, task := range input.Tasks {
+		tasks = append(tasks, domains.Task{
+			Description: task,
+		})
 	}
 	expInfo := domains.Exp{
 		Title: input.Title,
@@ -34,6 +41,7 @@ func (s *ExpService) AddExp(input *ExpInput, image *multipart.FileHeader) error{
 		Company: input.Company,
 		Period: input.Period,
 		Image: imageURL,
+		Tasks: tasks,
 	}
 	if err := s.ExpRepo.Create(&expInfo); err != nil {
 		return err
@@ -55,14 +63,27 @@ func (s *ExpService) GetExpByID(id uint) (domains.Exp, error){
 	return exp, nil
 }
 
-func (s *ExpService) UpdateExp(input *ExpInput) error{
+func (s *ExpService) UpdateExp(input *ExpInput, image *multipart.FileHeader) error{
 	exp, err := s.ExpRepo.GetByID(input.ID); if err != nil {
 		return err
+	}
+	if image != nil {
+		imageURL, err := s.ExpRepo.Upload(image); if err != nil {
+			return err
+		}
+		exp.Image = imageURL
 	}
 	exp.Title = input.Title
 	exp.Description = input.Description
 	exp.Company = input.Company
 	exp.Period = input.Period
+	var tasks []domains.Task
+	for _, task := range input.Tasks {
+		tasks = append(tasks, domains.Task{
+			Description: task,
+		})
+	}
+	exp.Tasks = tasks
 	if err := s.ExpRepo.Update(&exp); err != nil {
 		return err
 	}

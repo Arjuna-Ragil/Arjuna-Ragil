@@ -42,6 +42,7 @@ export default function AdminPage() {
     const [expCompany, setExpCompany] = useState("");
     const [expPeriod, setExpPeriod] = useState("");
     const [expDescription, setExpDescription] = useState("");
+    const [expTasks, setExpTasks] = useState([""]); // array of task strings
     const [expImage, setExpImage] = useState(null);
     const [addExpLoading, setAddExpLoading] = useState(false);
     const [addExpError, setAddExpError] = useState("");
@@ -52,6 +53,8 @@ export default function AdminPage() {
     const [editExpCompany, setEditExpCompany] = useState("");
     const [editExpPeriod, setEditExpPeriod] = useState("");
     const [editExpDescription, setEditExpDescription] = useState("");
+    const [editExpTasks, setEditExpTasks] = useState([""]); // array of task strings
+    const [editExpImage, setEditExpImage] = useState(null);
     const [editExpLoading, setEditExpLoading] = useState(false);
     const [editExpError, setEditExpError] = useState("");
 
@@ -61,6 +64,11 @@ export default function AdminPage() {
     const [deleteExpCompany, setDeleteExpCompany] = useState("");
     const [deleteExpLoading, setDeleteExpLoading] = useState(false);
     const [deleteExpError, setDeleteExpError] = useState("");
+
+    const [isViewExpModalOpen, setIsViewExpModalOpen] = useState(false);
+    const [viewExpData, setViewExpData] = useState(null);
+    const [viewExpLoading, setViewExpLoading] = useState(false);
+    const [viewExpError, setViewExpError] = useState("");
 
     // Project Modal state
     const [isAddPjModalOpen, setIsAddPjModalOpen] = useState(false);
@@ -94,6 +102,10 @@ export default function AdminPage() {
     const [viewPjData, setViewPjData] = useState(null);
     const [viewPjLoading, setViewPjLoading] = useState(false);
     const [viewPjError, setViewPjError] = useState("");
+
+    const [initialEditTech, setInitialEditTech] = useState(null);
+    const [initialEditExp, setInitialEditExp] = useState(null);
+    const [initialEditPj, setInitialEditPj] = useState(null);
 
     const fetchTechStacks = async () => {
         try {
@@ -148,8 +160,10 @@ export default function AdminPage() {
 
     const openEditTechModal = (tech, categoryKey) => {
         setEditTechId(tech.id);
+        const cat = categoryKey === "Others" ? (tech.category || "") : tech.category;
         setEditTechName(tech.name);
-        setEditTechCategory(categoryKey === "Others" ? (tech.category || "") : tech.category);
+        setEditTechCategory(cat);
+        setInitialEditTech({ name: tech.name, category: cat });
         setEditTechIcon(null);
         setEditTechError("");
         setIsEditTechModalOpen(true);
@@ -255,6 +269,19 @@ export default function AdminPage() {
         setEditExpCompany(exp.company);
         setEditExpPeriod(exp.period);
         setEditExpDescription(exp.description);
+
+        // Populate tasks from exp object if they exist, otherwise default to one empty string
+        const tasks = exp.tasks && exp.tasks.length > 0 ? exp.tasks.map(t => t.description) : [""];
+        setEditExpTasks(tasks);
+        setInitialEditExp({
+            title: exp.title,
+            company: exp.company,
+            period: exp.period,
+            description: exp.description,
+            tasks: tasks
+        });
+
+        setEditExpImage(null);
         setEditExpError("");
         setIsEditExpModalOpen(true);
     };
@@ -265,6 +292,25 @@ export default function AdminPage() {
         setDeleteExpCompany(exp.company);
         setDeleteExpError("");
         setIsDeleteExpModalOpen(true);
+    };
+
+    const openViewExpModal = async (id) => {
+        setIsViewExpModalOpen(true);
+        setViewExpLoading(true);
+        setViewExpError("");
+        setViewExpData(null);
+
+        try {
+            const response = await axios.get(`http://localhost:8080/api/v1/protected/exp/${id}`, {
+                withCredentials: true
+            });
+            setViewExpData(response.data.data || response.data);
+        } catch (err) {
+            console.error("Failed to fetch experience details:", err);
+            setViewExpError("Failed to load experience details.");
+        } finally {
+            setViewExpLoading(false);
+        }
     };
 
     const handleAddExpSubmit = async (e) => {
@@ -278,6 +324,13 @@ export default function AdminPage() {
             formData.append("company", expCompany);
             formData.append("period", expPeriod);
             formData.append("description", expDescription);
+
+            expTasks.forEach((task) => {
+                if (task.trim() !== "") {
+                    formData.append("tasks", task);
+                }
+            });
+
             if (expImage) formData.append("image", expImage);
 
             await axios.post("http://localhost:8080/api/v1/protected/exp/add", formData, {
@@ -290,6 +343,7 @@ export default function AdminPage() {
             setExpCompany("");
             setExpPeriod("");
             setExpDescription("");
+            setExpTasks([""]);
             setExpImage(null);
             fetchExperiences();
         } catch (err) {
@@ -306,15 +360,26 @@ export default function AdminPage() {
         setEditExpError("");
 
         try {
-            await axios.put("http://localhost:8080/api/v1/protected/exp/update", {
-                id: editExpId,
-                title: editExpTitle,
-                company: editExpCompany,
-                period: editExpPeriod,
-                description: editExpDescription
-            }, {
+            const formData = new FormData();
+            formData.append("id", editExpId);
+            formData.append("title", editExpTitle);
+            formData.append("company", editExpCompany);
+            formData.append("period", editExpPeriod);
+            formData.append("description", editExpDescription);
+
+            editExpTasks.forEach((task) => {
+                if (task.trim() !== "") {
+                    formData.append("tasks", task);
+                }
+            });
+
+            if (editExpImage) {
+                formData.append("image", editExpImage);
+            }
+
+            await axios.put("http://localhost:8080/api/v1/protected/exp/update", formData, {
                 withCredentials: true,
-                headers: { "Content-Type": "application/json" }
+                headers: { "Content-Type": "multipart/form-data" }
             });
 
             setIsEditExpModalOpen(false);
@@ -409,11 +474,15 @@ export default function AdminPage() {
         setEditPjImage(null); // Force them to pick a new image or let backend ignore if empty (if you implement that)
         setEditPjError("");
         // Pre-fill tech stacks
-        if (pj.tech_stacks) {
-            setEditPjTechStacks(pj.tech_stacks.map(ts => ts.id));
-        } else {
-            setEditPjTechStacks([]);
-        }
+        const techStacks = pj.tech_stacks ? pj.tech_stacks.map(ts => ts.id) : [];
+        setEditPjTechStacks(techStacks);
+        setInitialEditPj({
+            title: pj.title,
+            description: pj.description,
+            demo: pj.demo || "",
+            github: pj.github || "",
+            techStacks: techStacks
+        });
         setIsEditPjModalOpen(true);
     };
 
@@ -631,7 +700,7 @@ export default function AdminPage() {
                                         </tr>
                                     ) : (
                                         experiences.map((exp) => (
-                                            <tr key={exp.id} className="hover:bg-white/5 transition-colors">
+                                            <tr key={exp.id} className="hover:bg-white/5 transition-colors cursor-pointer" onClick={() => openViewExpModal(exp.id)}>
                                                 <td className="px-6 py-5">
                                                     <div className="flex items-center gap-4">
                                                         <div className="size-10 relative flex items-center justify-center bg-white/5 rounded-lg border border-white/10 shrink-0 overflow-hidden">
@@ -648,7 +717,7 @@ export default function AdminPage() {
                                                     </div>
                                                 </td>
                                                 <td className="px-6 py-5 text-sm text-slate-300">{exp.period}</td>
-                                                <td className="px-6 py-5 text-right">
+                                                <td className="px-6 py-5 text-right" onClick={(e) => e.stopPropagation()}>
                                                     <div className="flex justify-end gap-2">
                                                         <button
                                                             onClick={() => openEditExpModal(exp)}
@@ -864,7 +933,7 @@ export default function AdminPage() {
                                     />
                                 </div>
                                 <button
-                                    type="submit" disabled={editTechLoading}
+                                    type="submit" disabled={editTechLoading || (editTechName === initialEditTech?.name && editTechCategory === initialEditTech?.category && editTechIcon === null)}
                                     className="mt-2 bg-[#a855f7] hover:bg-[#a855f7]/90 text-white w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-[#a855f7]/40 uppercase tracking-widest text-sm disabled:opacity-70 disabled:cursor-not-allowed"
                                 >
                                     {editTechLoading ? <div className="size-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : "Save Changes"}
@@ -960,6 +1029,43 @@ export default function AdminPage() {
                                     <textarea required value={expDescription} onChange={(e) => setExpDescription(e.target.value)} rows="4" className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2.5 px-4 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all resize-none" placeholder="Describe your responsibilities and achievements..." />
                                 </div>
                                 <div className="flex flex-col gap-2">
+                                    <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Key Responsibilities & Tasks</label>
+                                    {expTasks.map((task, index) => (
+                                        <div key={index} className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                value={task}
+                                                onChange={(e) => {
+                                                    const newTasks = [...expTasks];
+                                                    newTasks[index] = e.target.value;
+                                                    setExpTasks(newTasks);
+                                                }}
+                                                className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2 px-4 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all"
+                                                placeholder="e.g. Developed scalable backend services..."
+                                            />
+                                            {expTasks.length > 1 && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        const newTasks = expTasks.filter((_, i) => i !== index);
+                                                        setExpTasks(newTasks);
+                                                    }}
+                                                    className="p-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-xl transition-colors border border-red-500/20"
+                                                >
+                                                    <X size={18} />
+                                                </button>
+                                            )}
+                                        </div>
+                                    ))}
+                                    <button
+                                        type="button"
+                                        onClick={() => setExpTasks([...expTasks, ""])}
+                                        className="text-xs font-bold text-[#a855f7] hover:text-[#c084fc] transition-colors self-start mt-1 flex items-center gap-1"
+                                    >
+                                        <PlusCircle size={14} /> Add Task
+                                    </button>
+                                </div>
+                                <div className="flex flex-col gap-2">
                                     <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Company Logo / Image *</label>
                                     <input type="file" required accept=".jpg,.jpeg,.png" onChange={(e) => setExpImage(e.target.files[0])} className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2 px-3 text-slate-100 text-sm file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-[#a855f7] file:text-white hover:file:bg-[#a855f7]/80 transition-all cursor-pointer" />
                                 </div>
@@ -1009,7 +1115,51 @@ export default function AdminPage() {
                                     <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Description *</label>
                                     <textarea required value={editExpDescription} onChange={(e) => setEditExpDescription(e.target.value)} rows="4" className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2.5 px-4 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all resize-none" />
                                 </div>
-                                <button type="submit" disabled={editExpLoading} className="mt-2 bg-[#a855f7] hover:bg-[#a855f7]/90 text-white w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-[#a855f7]/40 uppercase tracking-widest text-sm disabled:opacity-70 disabled:cursor-not-allowed">
+                                <div className="flex flex-col gap-2">
+                                    <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Key Responsibilities & Tasks</label>
+                                    {editExpTasks.map((task, index) => (
+                                        <div key={index} className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                value={task}
+                                                onChange={(e) => {
+                                                    const newTasks = [...editExpTasks];
+                                                    newTasks[index] = e.target.value;
+                                                    setEditExpTasks(newTasks);
+                                                }}
+                                                className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2 px-4 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all"
+                                                placeholder="e.g. Developed scalable backend services..."
+                                            />
+                                            {editExpTasks.length > 1 && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        const newTasks = editExpTasks.filter((_, i) => i !== index);
+                                                        setEditExpTasks(newTasks);
+                                                    }}
+                                                    className="p-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-xl transition-colors border border-red-500/20"
+                                                >
+                                                    <X size={18} />
+                                                </button>
+                                            )}
+                                        </div>
+                                    ))}
+                                    <button
+                                        type="button"
+                                        onClick={() => setEditExpTasks([...editExpTasks, ""])}
+                                        className="text-xs font-bold text-[#a855f7] hover:text-[#c084fc] transition-colors self-start mt-1 flex items-center gap-1"
+                                    >
+                                        <PlusCircle size={14} /> Add Task
+                                    </button>
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">New Company Logo / Image</label>
+                                    <input type="file" accept=".jpg,.jpeg,.png" onChange={(e) => setEditExpImage(e.target.files[0])} className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2 px-3 text-slate-100 text-sm file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-[#a855f7] file:text-white hover:file:bg-[#a855f7]/80 transition-all cursor-pointer" />
+                                </div>
+                                <button
+                                    type="submit"
+                                    disabled={editExpLoading || (editExpTitle === initialEditExp?.title && editExpCompany === initialEditExp?.company && editExpPeriod === initialEditExp?.period && editExpDescription === initialEditExp?.description && JSON.stringify(editExpTasks) === JSON.stringify(initialEditExp?.tasks) && editExpImage === null)}
+                                    className="mt-2 bg-[#a855f7] hover:bg-[#a855f7]/90 text-white w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-[#a855f7]/40 uppercase tracking-widest text-sm disabled:opacity-70 disabled:cursor-not-allowed">
                                     {editExpLoading ? <div className="size-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : "Save Changes"}
                                 </button>
                             </form>
@@ -1060,6 +1210,74 @@ export default function AdminPage() {
                                     </button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* View Experience Details Modal */}
+            {isViewExpModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setIsViewExpModalOpen(false)}>
+                    <div
+                        className="glass-card w-full max-w-2xl max-h-[90vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-[#0f0a19]/90 border border-[#c084fc]/20 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-[#1e1b4b]/50 bg-[#0f0a19]/90 backdrop-blur-md">
+                            <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2">
+                                <Briefcase size={20} className="text-[#a855f7]" /> Experience Details
+                            </h3>
+                            <button onClick={() => setIsViewExpModalOpen(false)} className="text-slate-400 hover:text-white transition-colors">
+                                <X size={20} />
+                            </button>
+                        </div>
+                        <div className="p-6">
+                            {viewExpLoading ? (
+                                <div className="flex justify-center items-center py-20">
+                                    <div className="size-8 border-2 border-[#a855f7]/30 border-t-[#a855f7] rounded-full animate-spin"></div>
+                                </div>
+                            ) : viewExpError ? (
+                                <div className="p-8 text-center text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl">
+                                    {viewExpError}
+                                </div>
+                            ) : viewExpData ? (
+                                <div className="flex flex-col gap-6">
+                                    <div className="flex items-start gap-5">
+                                        <div className="size-20 relative flex items-center justify-center bg-white/5 rounded-xl border border-white/10 shrink-0 overflow-hidden shadow-lg">
+                                            {viewExpData.image ? (
+                                                <img src={viewExpData.image} alt={viewExpData.company} className="w-full h-full object-cover" />
+                                            ) : (
+                                                <Briefcase size={32} className="text-[#a855f7]" />
+                                            )}
+                                        </div>
+                                        <div>
+                                            <h2 className="text-2xl font-black text-white">{viewExpData.title}</h2>
+                                            <p className="text-lg font-bold text-[#c084fc] mt-1">{viewExpData.company}</p>
+                                            <p className="text-sm text-slate-400 font-medium mt-1 uppercase tracking-wider">{viewExpData.period}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-white/5 border border-white/10 rounded-xl p-5 shadow-inner">
+                                        <h4 className="text-xs font-black uppercase tracking-widest text-[#a855f7] mb-3">Description</h4>
+                                        <p className="text-slate-300 text-sm leading-relaxed max-w-none">
+                                            {viewExpData.description}
+                                        </p>
+                                    </div>
+
+                                    {viewExpData.tasks && viewExpData.tasks.length > 0 && (
+                                        <div className="bg-white/5 border border-white/10 rounded-xl p-5 shadow-inner">
+                                            <h4 className="text-xs font-black uppercase tracking-widest text-[#a855f7] mb-3">Key Responsibilities</h4>
+                                            <ul className="space-y-3">
+                                                {viewExpData.tasks.map((task) => (
+                                                    <li key={task.id} className="flex gap-3 text-sm text-slate-300 leading-relaxed">
+                                                        <span className="text-[#a855f7] mt-1 shrink-0"><Code2 size={14} /></span>
+                                                        <span>{task.description}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : null}
                         </div>
                     </div>
                 </div>
@@ -1237,7 +1455,10 @@ export default function AdminPage() {
                                     </div>
                                 </div>
 
-                                <button type="submit" disabled={editPjLoading} className="mt-4 bg-[#a855f7] hover:bg-[#a855f7]/90 text-white w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-[#a855f7]/40 uppercase tracking-widest text-sm disabled:opacity-70 disabled:cursor-not-allowed">
+                                <button
+                                    type="submit"
+                                    disabled={editPjLoading || (editPjTitle === initialEditPj?.title && editPjDescription === initialEditPj?.description && editPjDemo === initialEditPj?.demo && editPjGithub === initialEditPj?.github && JSON.stringify([...editPjTechStacks].sort()) === JSON.stringify([...(initialEditPj?.techStacks || [])].sort()) && editPjImage === null)}
+                                    className="mt-4 bg-[#a855f7] hover:bg-[#a855f7]/90 text-white w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-[#a855f7]/40 uppercase tracking-widest text-sm disabled:opacity-70 disabled:cursor-not-allowed">
                                     {editPjLoading ? <div className="size-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : "Save Changes"}
                                 </button>
                             </form>

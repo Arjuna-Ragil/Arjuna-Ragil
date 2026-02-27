@@ -37,6 +37,7 @@ func SetupV1Routes(r *gin.Engine, d Deps) {
 			}
 			exp := protected.Group("/exp")
 			{
+				exp.GET("/:id", d.Exp.GetExp)
 				exp.POST("/add", d.Exp.AddNewExp)
 				exp.PUT("/update", d.Exp.UpdateExp)
 				exp.DELETE("/delete/:id", d.Exp.DeleteExp)

@@ -41,13 +41,31 @@ func (h *ExpHandler) GetAllExp(c *gin.Context){
 	c.JSON(http.StatusOK, exp)
 }
 
+func (h *ExpHandler) GetExp(c *gin.Context){
+	id := c.Param("id")
+	idUint, err := strconv.Atoi(id); if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	exp, err := h.ExpService.GetExpByID(uint(idUint)); if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, exp)
+}
+
 func (h *ExpHandler) UpdateExp(c *gin.Context){
 	var input services.ExpInput
-	if err := c.ShouldBindJSON(&input); err != nil {
+	if err := c.ShouldBind(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	if err := h.ExpService.UpdateExp(&input); err != nil {
+	image, err := c.FormFile("image"); 
+	if err != nil && err != http.ErrMissingFile {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if err := h.ExpService.UpdateExp(&input, image); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}

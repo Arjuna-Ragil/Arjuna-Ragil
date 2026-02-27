@@ -28,19 +28,25 @@ func (r *ExpRepo) Create(exp *domains.Exp) error {
 
 func (r *ExpRepo) GetAll() ([]domains.Exp, error) {
 	var exp []domains.Exp
-	err := r.DB.gorm.Find(&exp).Error
+	err := r.DB.gorm.Preload("Tasks").Find(&exp).Error
 	return exp, err
 }
 
 func (r *ExpRepo) GetByID(id uint) (domains.Exp, error) {
 	var exp domains.Exp
-	err := r.DB.gorm.First(&exp, id).Error
+	err := r.DB.gorm.Preload("Tasks").First(&exp, id).Error
 	return exp, err
 }
 
 func (r *ExpRepo) Update(exp *domains.Exp) error {
-	err := r.DB.gorm.Save(exp).Error
-	return err
+	if err := r.DB.gorm.Where("exp_id = ?", exp.ID).Delete(&domains.Task{}).Error; err != nil {
+		return err
+	}
+	err := r.DB.gorm.Preload("Tasks").Save(exp).Error
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (r *ExpRepo) Delete(id uint) error {

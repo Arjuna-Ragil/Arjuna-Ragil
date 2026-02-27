@@ -7,7 +7,7 @@ type Exp struct {
 	Company string `gorm:"not null" json:"company"`
 	Period string `gorm:"not null" json:"period"`
 	Image string `gorm:"not null" json:"image"`
-	Tasks []Task `gorm:"foreignKey:ExpID" json:"tasks"`
+	Tasks []Task `gorm:"foreignKey:ExpID;constraint:OnDelete:CASCADE" json:"tasks"`
 }
 
 type Task struct {
