@@ -1021,12 +1021,12 @@ export default function AdminPage() {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Period *</label>
-                                    <input type="text" required value={expPeriod} onChange={(e) => setExpPeriod(e.target.value)} className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2.5 px-4 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all" placeholder="e.g. Jan 2022 - Present" />
+                                    <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Period</label>
+                                    <input type="text" value={expPeriod} onChange={(e) => setExpPeriod(e.target.value)} className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2.5 px-4 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all" placeholder="e.g. Jan 2022 - Present" />
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Description *</label>
-                                    <textarea required value={expDescription} onChange={(e) => setExpDescription(e.target.value)} rows="4" className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2.5 px-4 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all resize-none" placeholder="Describe your responsibilities and achievements..." />
+                                    <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Description</label>
+                                    <textarea value={expDescription} onChange={(e) => setExpDescription(e.target.value)} rows="4" className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2.5 px-4 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all resize-none" placeholder="Describe your responsibilities and achievements..." />
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Key Responsibilities & Tasks</label>
@@ -1108,12 +1108,12 @@ export default function AdminPage() {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Period *</label>
-                                    <input type="text" required value={editExpPeriod} onChange={(e) => setEditExpPeriod(e.target.value)} className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2.5 px-4 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all" />
+                                    <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Period</label>
+                                    <input type="text" value={editExpPeriod} onChange={(e) => setEditExpPeriod(e.target.value)} className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2.5 px-4 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all" />
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Description *</label>
-                                    <textarea required value={editExpDescription} onChange={(e) => setEditExpDescription(e.target.value)} rows="4" className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2.5 px-4 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all resize-none" />
+                                    <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Description</label>
+                                    <textarea value={editExpDescription} onChange={(e) => setEditExpDescription(e.target.value)} rows="4" className="w-full bg-white/5 border border-[#1e1b4b] rounded-xl py-2.5 px-4 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all resize-none" />
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label className="text-xs font-bold uppercase tracking-wider text-[#c084fc]">Key Responsibilities & Tasks</label>

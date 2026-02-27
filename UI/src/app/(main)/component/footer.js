@@ -29,7 +29,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className="bg-brand/5 py-6 text-center border-t border-brand/10">
-                <p className="text-[10px] text-zinc-600 uppercase tracking-widest">© 2024 Arjuna Ragil Putera. Exploring the digital cosmos.</p>
+                <p className="text-[10px] text-zinc-600 uppercase tracking-widest">© 2026 Arjuna Ragil Putera. Exploring the digital cosmos.</p>
             </div>
         </div>
     )
