@@ -18,11 +18,11 @@ export default function Home() {
             {/* Overlay Layer: Blurs the video + adds a purplish tint for text readability */}
             <div className="absolute top-0 left-0 w-full h-full bg-[#120b24]/50 backdrop-blur-[6px] z-0"></div>
 
-            <div className="z-10 text-center flex flex-col items-center justify-center gap-6 relative">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[0.1em] uppercase text-white mb-4 max-w-5xl text-center leading-tight">
+            <div className="z-10 text-center flex flex-col items-center justify-center gap-4 relative md:gap-6 px-4">
+                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[0.1em] uppercase text-white mb-2 md:mb-4 max-w-5xl text-center leading-tight">
                     {tagline}
                 </h1>
-                <p className="text-brand text-sm md:text-base tracking-[0.2em] md:tracking-[0.3em] uppercase font-light opacity-80 mt-4">
+                <p className="text-brand text-xs sm:text-sm md:text-base tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.3em] uppercase font-light opacity-80 mt-2 md:mt-4">
                     {sub}
                 </p>
             </div>
