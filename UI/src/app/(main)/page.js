@@ -5,6 +5,7 @@ import Navbar from "./component/navbar";
 import Profile from "./component/profile";
 import Projects from "./component/projects";
 import TechStack from "./component/techstack";
+import Chat from "./component/chat";
 
 export default function Main() {
     return (
@@ -13,9 +14,10 @@ export default function Main() {
             <Home />
             <Profile />
             <TechStack />
-            <Exp/>
+            <Exp />
             <Projects />
             <Footer />
+            <Chat />
         </>
     )
 }

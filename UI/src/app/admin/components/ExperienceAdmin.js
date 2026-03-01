@@ -488,7 +488,7 @@ export default function ExperienceAdmin() {
 
                                 <div className="p-4 bg-red-500/5 border border-red-500/20 rounded-xl">
                                     <p className="text-slate-200 text-sm leading-relaxed text-center">
-                                        Are you sure you want to permanently delete <strong className="text-white">"{deleteExpTitle}"</strong> at <strong className="text-white">"{deleteExpCompany}"</strong> from your mission logs? This action cannot be undone.
+                                        Are you sure you want to permanently delete <strong className="text-white">&quot;{deleteExpTitle}&quot;</strong> at <strong className="text-white">&quot;{deleteExpCompany}&quot;</strong> from your mission logs? This action cannot be undone.
                                     </p>
                                 </div>
 

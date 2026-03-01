@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="w-full mt-20 relative z-10 border-t border-brand/20 bg-[rgba(5,3,10,0.8)] glass-card">
             <div className="max-w-7xl mx-auto px-6 py-20 flex flex-col lg:flex-row justify-between items-center gap-12">
                 <div className="flex flex-col gap-6 max-w-2xl text-center lg:text-left">
-                    <h3 className="text-4xl font-extrabold uppercase tracking-widest text-white">Let's connect</h3>
+                    <h3 className="text-4xl font-extrabold uppercase tracking-widest text-white">Let&apos;s connect</h3>
                     <p className="text-zinc-400 text-lg leading-relaxed">{longText}</p>
                     <div className="flex gap-8 justify-center lg:justify-start mt-4">
                         <a href="https://github.com/Arjuna-Ragil" className="text-zinc-500 hover:text-brand transition-colors duration-300" target="_blank" aria-label="GitHub"><Github size={28} /></a>

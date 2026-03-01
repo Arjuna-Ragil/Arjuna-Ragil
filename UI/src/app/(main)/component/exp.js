@@ -61,7 +61,7 @@ export default function Exp() {
 
                                 {exp.description && (
                                     <p className="px-4 md:px-12 text-center text-lg leading-relaxed opacity-90 mx-auto max-w-3xl mt-2 italic text-slate-400">
-                                        "{exp.description}"
+                                        &quot;{exp.description}&quot;
                                     </p>
                                 )}
 

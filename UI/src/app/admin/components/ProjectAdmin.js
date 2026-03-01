@@ -535,7 +535,7 @@ export default function ProjectAdmin() {
 
                                 <div className="p-4 bg-red-500/5 border border-red-500/20 rounded-xl">
                                     <p className="text-slate-200 text-sm leading-relaxed text-center">
-                                        Are you sure you want to permanently delete the constellation <strong className="text-white">"{deletePjTitle}"</strong>? This action cannot be undone.
+                                        Are you sure you want to permanently delete the constellation <strong className="text-white">&quot;{deletePjTitle}&quot;</strong>? This action cannot be undone.
                                     </p>
                                 </div>
 
