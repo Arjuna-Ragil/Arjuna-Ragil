@@ -8,15 +8,15 @@ def get_ai_response(question: str):
     vector_db = Chroma(
         persist_directory="./chroma_data",
         embedding_function=embeddings,
-        collection_name="porto_projects"
+        collection_name="porto_all_data"
     )
 
-    retriever = vector_db.as_retriever(search_kwargs={"k": 2})
+    retriever = vector_db.as_retriever(search_kwargs={"k": 4})
 
     llm = OllamaLLM(model="qwen3:0.6b")
 
     template = """Kamu adalah asisten AI profesional di portofolio milik Arjuna (Mahasiswa Sistem Informasi UIN Jakarta).
-    Tugasmu adalah menjawab pertanyaan pengunjung berdasarkan informasi project dan pengalaman Arjuna di bawah ini.
+    Tugasmu adalah menjawab pertanyaan pengunjung berdasarkan informasi techstack, project, dan pengalaman Arjuna di bawah ini.
     Gunakan bahasa yang ramah, asik, dan profesional. Jika informasinya tidak ada di konteks, bilang saja kamu tidak tahu.
 
     Konteks Informasi:
@@ -33,7 +33,3 @@ def get_ai_response(question: str):
 
     answer = llm.invoke(final_prompt)
     return answer
-
-if __name__ == "__main__":
-    question = "Bisa tolong jelaskan siapa itu arjuna dan project apa yang dia buat menggunakan react?"
-    print(get_ai_response(question))
