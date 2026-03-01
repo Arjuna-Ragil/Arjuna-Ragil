@@ -45,3 +45,5 @@ stitch_assets
 s3_config.json
 docker-compose.override.yml
 .idea
+__pycache__
+chroma_data

@@ -48,9 +48,24 @@ services:
     networks:
       - porto_network
 
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: PortoVectorDB
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./chroma_data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+    networks:
+      - porto_network
+
 volumes:
   pg_data:
   seaweed_data:
+  chroma_data:
 
 networks:
   porto_network:
