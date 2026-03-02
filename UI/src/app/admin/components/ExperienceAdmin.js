@@ -46,7 +46,7 @@ export default function ExperienceAdmin() {
 
     const fetchExperiences = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/v1/open/exp");
+            const response = await axios.get(`/api/v1/open/exp`);
             setExperiences(response.data.data || response.data || []);
         } catch (error) {
             console.error("Failed to fetch experiences:", error);
@@ -97,7 +97,7 @@ export default function ExperienceAdmin() {
         setViewExpData(null);
 
         try {
-            const response = await axios.get(`http://localhost:8080/api/v1/protected/exp/${id}`, {
+            const response = await axios.get(`/api/v1/protected/exp/${id}`, {
                 withCredentials: true
             });
             setViewExpData(response.data.data || response.data);
@@ -129,7 +129,7 @@ export default function ExperienceAdmin() {
 
             if (expImage) formData.append("image", expImage);
 
-            await axios.post("http://localhost:8080/api/v1/protected/exp/add", formData, {
+            await axios.post(`/api/v1/protected/exp/add`, formData, {
                 withCredentials: true,
                 headers: { "Content-Type": "multipart/form-data" }
             });
@@ -173,7 +173,7 @@ export default function ExperienceAdmin() {
                 formData.append("image", editExpImage);
             }
 
-            await axios.put("http://localhost:8080/api/v1/protected/exp/update", formData, {
+            await axios.put(`/api/v1/protected/exp/update`, formData, {
                 withCredentials: true,
                 headers: { "Content-Type": "multipart/form-data" }
             });
@@ -194,7 +194,7 @@ export default function ExperienceAdmin() {
         setDeleteExpError("");
 
         try {
-            await axios.delete(`http://localhost:8080/api/v1/protected/exp/delete/${deleteExpId}`, {
+            await axios.delete(`/api/v1/protected/exp/delete/${deleteExpId}`, {
                 withCredentials: true,
                 headers: { "Content-Type": "application/json" }
             });

@@ -47,7 +47,7 @@ export default function ProjectAdmin() {
 
     const fetchTechStacks = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/v1/open/ts");
+            const response = await axios.get(`/api/v1/open/ts`);
             const data = response.data.data || response.data || [];
 
             const grouped = data.reduce((acc, curr) => {
@@ -68,7 +68,7 @@ export default function ProjectAdmin() {
 
     const fetchProjects = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/v1/open/pj");
+            const response = await axios.get(`/api/v1/open/pj`);
             setProjects(response.data.data || response.data || []);
         } catch (error) {
             console.error("Failed to fetch projects:", error);
@@ -113,7 +113,7 @@ export default function ProjectAdmin() {
 
             if (pjImage) formData.append("image", pjImage);
 
-            await axios.post("http://localhost:8080/api/v1/protected/pj/add", formData, {
+            await axios.post(`/api/v1/protected/pj/add`, formData, {
                 withCredentials: true,
                 headers: { "Content-Type": "multipart/form-data" }
             });
@@ -169,7 +169,7 @@ export default function ProjectAdmin() {
         setViewPjData(null);
 
         try {
-            const response = await axios.get(`http://localhost:8080/api/v1/protected/pj/${id}`, {
+            const response = await axios.get(`/api/v1/protected/pj/${id}`, {
                 withCredentials: true
             });
             setViewPjData(response.data.data || response.data);
@@ -203,7 +203,7 @@ export default function ProjectAdmin() {
                 formData.append("image", editPjImage);
             }
 
-            await axios.put("http://localhost:8080/api/v1/protected/pj/update", formData, {
+            await axios.put(`/api/v1/protected/pj/update`, formData, {
                 withCredentials: true,
                 headers: { "Content-Type": "multipart/form-data" }
             });
@@ -224,7 +224,7 @@ export default function ProjectAdmin() {
         setDeletePjError("");
 
         try {
-            await axios.delete(`http://localhost:8080/api/v1/protected/pj/delete/${deletePjId}`, {
+            await axios.delete(`/api/v1/protected/pj/delete/${deletePjId}`, {
                 withCredentials: true
             });
 

@@ -1,3 +1,5 @@
+from data.ingestor import ingest_all_porto
+from fastapi import BackgroundTasks
 from core.AIengine import get_ai_response
 from pydantic import BaseModel
 from fastapi import FastAPI
@@ -22,6 +24,14 @@ async def chat_ai(req: ChatRequest):
     return {
         "status": "success",
         "data": answer
+    }
+
+@app.post("/api/v1/sync")
+async def sync_data(bg_tasks: BackgroundTasks):
+    bg_tasks.add_task(ingest_all_porto)
+    return {
+        "status": "Success",
+        "message": "Syncing data in background"
     }
 
 @app.get("/health")

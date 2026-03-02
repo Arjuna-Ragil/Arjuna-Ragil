@@ -35,7 +35,7 @@ export default function Chat() {
         setIsLoading(true);
 
         try {
-            const response = await axios.post("http://localhost:8081/api/v1/chat", {
+            const response = await axios.post(`/api/v1/chat`, {
                 question: userMessage
             });
 

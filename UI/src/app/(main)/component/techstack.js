@@ -10,7 +10,7 @@ export default function TechStack() {
     useEffect(() => {
         const fetchTechStacks = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/api/v1/open/ts")
+                const response = await axios.get(`/api/v1/open/ts`)
                 const data = response.data.data || response.data || []
 
                 const grouped = data.reduce((acc, curr) => {

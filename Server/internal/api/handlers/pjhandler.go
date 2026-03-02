@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal/core/services"
+	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -30,6 +31,7 @@ func (h *PjHandler) AddPj(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+	go utils.TriggerAISync()
 	c.JSON(http.StatusOK, gin.H{"message": "Project added successfully"})
 }
 
@@ -69,6 +71,7 @@ func (h *PjHandler) UpdatePj(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+	go utils.TriggerAISync()
 	c.JSON(http.StatusOK, gin.H{"message": "Project updated successfully"})
 }
 
@@ -82,5 +85,6 @@ func (h *PjHandler) DeletePj(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+	go utils.TriggerAISync()
 	c.JSON(http.StatusOK, gin.H{"message": "Project deleted successfully"})
 }

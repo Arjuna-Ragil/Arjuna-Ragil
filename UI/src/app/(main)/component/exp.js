@@ -10,7 +10,7 @@ export default function Exp() {
     useEffect(() => {
         const fetchExperiences = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/api/v1/open/exp");
+                const response = await axios.get(`/api/v1/open/exp`);
                 let data = response.data.data || response.data || [];
                 // Sort by ID descending (newer at the top)
                 data.sort((a, b) => b.id - a.id);

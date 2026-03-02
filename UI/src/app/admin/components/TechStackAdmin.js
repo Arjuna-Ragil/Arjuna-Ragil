@@ -34,7 +34,7 @@ export default function TechStackAdmin() {
 
     const fetchTechStacks = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/v1/open/ts");
+            const response = await axios.get(`/api/v1/open/ts`);
             const data = response.data.data || response.data || [];
 
             const grouped = data.reduce((acc, curr) => {
@@ -91,7 +91,7 @@ export default function TechStackAdmin() {
                 formData.append("icon", editTechIcon);
             }
 
-            await axios.put("http://localhost:8080/api/v1/protected/ts/update", formData, {
+            await axios.put(`/api/v1/protected/ts/update`, formData, {
                 withCredentials: true,
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -114,7 +114,7 @@ export default function TechStackAdmin() {
         setDeleteTechError("");
 
         try {
-            await axios.delete(`http://localhost:8080/api/v1/protected/ts/delete/${deleteTechId}`, {
+            await axios.delete(`/api/v1/protected/ts/delete/${deleteTechId}`, {
                 withCredentials: true,
                 headers: {
                     "Content-Type": "application/json",
@@ -144,7 +144,7 @@ export default function TechStackAdmin() {
                 formData.append("icon", techIcon);
             }
 
-            await axios.post("http://localhost:8080/api/v1/protected/ts/add", formData, {
+            await axios.post(`/api/v1/protected/ts/add`, formData, {
                 withCredentials: true,
                 headers: {
                     "Content-Type": "multipart/form-data",

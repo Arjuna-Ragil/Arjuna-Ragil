@@ -11,7 +11,7 @@ export default function Projects() {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/api/v1/open/pj");
+                const response = await axios.get(`/api/v1/open/pj`);
                 let data = response.data.data || response.data || [];
                 // Sort by ID descending (newer projects first)
                 data.sort((a, b) => b.id - a.id);

@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal/core/services"
+	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -31,6 +32,7 @@ func (handler *TSHandler) AddTS(c *gin.Context){
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+	go utils.TriggerAISync()
 	c.JSON(http.StatusOK, gin.H{"message": "Tech Stack added successfully"})
 }
 
@@ -57,6 +59,7 @@ func (handler *TSHandler) UpdateTS(c *gin.Context){
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+	go utils.TriggerAISync()
 	c.JSON(http.StatusOK, gin.H{"message": "Tech Stack updated successfully"})
 }
 
@@ -70,5 +73,6 @@ func (handler *TSHandler) DeleteTS(c *gin.Context){
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+	go utils.TriggerAISync()
 	c.JSON(http.StatusOK, gin.H{"message": "Tech Stack deleted successfully"})
 }
