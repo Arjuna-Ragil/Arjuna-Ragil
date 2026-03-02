@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD} 
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     volumes:
       - pg_data:/var/lib/postgresql/data
@@ -25,23 +25,27 @@ services:
       - ./seaweedfs_config/s3_config.json:/etc/seaweedfs/s3_config.json
     networks:
       - porto_network
-  
+
   backend:
     build: ./Server
     container_name: PortoBE
     restart: unless-stopped
     networks:
       - porto_network
+    env_file:
+      - .env
     depends_on:
       - db
       - seaweedfs
-  
+
   frontend:
     build: ./UI
     container_name: PortoFE
     restart: unless-stopped
     ports:
       - "3002:3000"
+    env_file:
+      - .env
     depends_on:
       - backend
     networks:
@@ -51,10 +55,12 @@ services:
     build: ./AI Service
     container_name: PortoAI
     restart: unless-stopped
-    networks:
-      - porto_network
+    env_file:
+      - .env
     depends_on:
       - backend
+    networks:
+      - porto_network
 
 volumes:
   pg_data:
@@ -63,4 +69,3 @@ volumes:
 networks:
   porto_network:
     driver: bridge
-
