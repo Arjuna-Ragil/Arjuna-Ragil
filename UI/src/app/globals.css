@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #ab8aff;
+  --color-brand-dark: #120b24;
+  --color-brand-deep: #05030a;
+
+  --animate-twinkle: twinkle 4s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes twinkle {
+
+    0%,
+    100% {
+      opacity: 0.2;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #05030a;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+.space-gradient {
+  background: radial-gradient(circle at 50% 50%, #120b24 0%, #05030a 100%);
+}
+
+.star-field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+.glass-card {
+  background: rgba(171, 138, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(171, 138, 255, 0.1);
+}
+
+.project-card:hover {
+  box-shadow: 0 0 30px rgba(171, 138, 255, 0.15);
+  border-color: rgba(171, 138, 255, 0.4);
+}
