@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     async rewrites() {
-        const beUrl = process.env.BE_URL ? (process.env.BE_URL.startsWith('http') ? process.env.BE_URL : `http://${process.env.BE_URL}`) : 'http://localhost:8080';
-        const aiUrl = process.env.AI_URL ? (process.env.AI_URL.startsWith('http') ? process.env.AI_URL : `http://${process.env.AI_URL}`) : 'http://localhost:8081';
+        const beUrl = process.env.BE_URL || 'http://PortoBE:8080';
+        const aiUrl = process.env.AI_URL || 'http://ai_service:8081';
 
         return [
             {
