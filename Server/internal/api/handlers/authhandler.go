@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal/core/services"
@@ -22,7 +21,6 @@ func (h *AuthHandler) Login(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	log.Printf("📝 REQUEST MASUK -> Username: '%s' | Password Length: %d\n", input.Username, len(input.Password))
 	token, err := h.AuthService.LoginService(&input); if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
