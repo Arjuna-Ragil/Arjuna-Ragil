@@ -48,15 +48,20 @@ export default function Exp() {
                         <div key={exp.id} className="w-full flex text-zinc-300 flex-col gap-6 items-center justify-center glass-card rounded-custom p-8 md:p-12 shadow-[0_0_30px_rgba(171,138,255,0.05)] border-brand/10 hover:border-brand/30 transition-colors duration-500">
                             <div className="w-full flex flex-col items-center justify-evenly text-center gap-6">
                                 {exp.image && (
-                                    <div className="h-32 w-32 relative group">
-                                        <img src={exp.image} alt={exp.company || exp.title} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
+                                    <div className="h-48 w-48 sm:h-56 sm:w-56 md:h-64 md:w-64 relative group rounded-xl overflow-hidden shadow-lg shadow-brand/10 bg-white/5 border border-white/10 p-2">
+                                        <img src={exp.image} alt={exp.company || exp.title} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 rounded-lg" />
                                     </div>
                                 )}
-                                <div className="flex flex-col gap-2 items-center">
-                                    <h2 className="text-2xl md:text-3xl font-bold text-white tracking-wider">
-                                        {exp.title} {exp.period && <span className="text-xl md:text-2xl text-slate-300">({exp.period})</span>}
+                                <div className="flex flex-col gap-3 items-center w-full">
+                                    <h2 className="text-2xl md:text-3xl font-bold text-white tracking-wider text-center">
+                                        {exp.title}
                                     </h2>
-                                    {exp.company && <h3 className="text-xl font-semibold text-[#c084fc] uppercase tracking-wide">{exp.company}</h3>}
+                                    {exp.period && (
+                                        <div className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm md:text-base font-medium tracking-wide">
+                                            {exp.period}
+                                        </div>
+                                    )}
+                                    {exp.company && <h3 className="text-xl font-bold text-[#c084fc] uppercase tracking-widest text-center">{exp.company}</h3>}
                                 </div>
 
                                 {exp.description && (
