@@ -24,5 +24,5 @@ jobs:
           script: |
             cd /DATA/Projects/Arjuna-Ragil
             git pull origin main
-            docker-compose up -d --build
+            docker compose up -d --build
             docker image prune -f

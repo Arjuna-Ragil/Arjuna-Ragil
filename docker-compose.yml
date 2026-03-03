@@ -17,8 +17,8 @@ services:
     container_name: PortoBucket
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8335:8333"
-      - "127.0.0.1:8890:8888"
+      - "8335:8333"
+      - "8890:8888"
     command: "server -s3 -filer -master.volumeSizeLimitMB=1024 -volume.max=100 -s3.config=/etc/seaweedfs/s3_config.json"
     volumes:
       - seaweed_data:/data
