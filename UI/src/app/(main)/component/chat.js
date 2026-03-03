@@ -53,10 +53,10 @@ export default function Chat() {
     };
 
     return (
-        <div className={`fixed z-[60] flex flex-col items-end transition-all text-left duration-300 ${isExpanded ? "inset-4 sm:inset-8" : "bottom-6 right-6"}`}>
+        <div className={`fixed z-[60] flex flex-col items-end transition-all text-left duration-300 pointer-events-none ${isExpanded ? "inset-4 sm:inset-8" : "bottom-6 right-6"}`}>
             {/* Chat Window */}
             <div
-                className={`transition-all duration-300 ease-in-out origin-bottom-right flex flex-col ${isOpen ? "scale-100 opacity-100 mb-4" : "scale-0 opacity-0 h-0 w-0 overflow-hidden"} ${isExpanded ? "w-full h-full" : "w-[350px] sm:w-[400px] h-[500px] max-h-[70vh]"}`}
+                className={`pointer-events-auto transition-all duration-300 ease-in-out origin-bottom-right flex flex-col ${isOpen ? "scale-100 opacity-100 mb-4" : "scale-0 opacity-0 h-0 w-0 overflow-hidden"} ${isExpanded ? "w-full h-full" : "w-[350px] sm:w-[400px] h-[500px] max-h-[70vh]"}`}
             >
                 <div className="glass-card w-full h-full flex flex-col bg-[#0f0a19]/90 border border-[#c084fc]/30 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-xl overflow-hidden">
 
@@ -178,7 +178,7 @@ export default function Chat() {
             {!isExpanded && (
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`relative group flex items-center justify-center size-14 rounded-full shadow-[0_8px_25px_rgba(0,0,0,0.5)] transition-all duration-300 hover:scale-105 z-50 ${isOpen
+                    className={`pointer-events-auto relative group flex items-center justify-center size-14 rounded-full shadow-[0_8px_25px_rgba(0,0,0,0.5)] transition-all duration-300 hover:scale-105 z-50 ${isOpen
                         ? "bg-white/10 border border-white/20 text-slate-300 hover:bg-white/20"
                         : "bg-[#a855f7] border border-[#c084fc] text-white hover:shadow-[0_0_20px_rgba(168,85,247,0.6)]"
                         }`}
