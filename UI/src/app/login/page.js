@@ -19,9 +19,15 @@ export default function LoginPage() {
         setError("");
 
         try {
-            const response = await axios.post(`/api/v1/open/login`, {
+            const response = await axios.post(`/api/v1/open/login`, 
+                {
                 username,
                 password
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
             });
 
             if (response.data.token) {

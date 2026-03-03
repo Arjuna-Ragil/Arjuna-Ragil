@@ -2,7 +2,6 @@ package services
 
 import (
 	"errors"
-	"log"
 	"time"
 
 	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal"
@@ -18,14 +17,11 @@ func NewAuthConfig(cfg *internal.Config) *AuthConfig {
 }
 
 type LoginInput struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required"`
 }
 
 func (auth *AuthConfig) LoginService(input *LoginInput) (string, error) {
-	log.Println(input.Username)
-	log.Println(input.Password)
-
 	if input.Username != auth.cfg.Username || input.Password != auth.cfg.Password {
 		return "", errors.New("invalid credentials")
 	}
