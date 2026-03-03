@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     async rewrites() {
-        const beUrl = process.env.BE_URL || 'http://PortoBE:8080';
+        const beUrl = process.env.BE_URL || 'http://backend:8080';
         const aiUrl = process.env.AI_URL || 'http://ai_service:8081';
 
         return [
