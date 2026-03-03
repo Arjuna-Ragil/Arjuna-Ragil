@@ -48,8 +48,8 @@ export default function Exp() {
                         <div key={exp.id} className="w-full flex text-zinc-300 flex-col gap-6 items-center justify-center glass-card rounded-custom p-8 md:p-12 shadow-[0_0_30px_rgba(171,138,255,0.05)] border-brand/10 hover:border-brand/30 transition-colors duration-500">
                             <div className="w-full flex flex-col items-center justify-evenly text-center gap-6">
                                 {exp.image && (
-                                    <div className="h-48 w-48 sm:h-56 sm:w-56 md:h-64 md:w-64 relative group rounded-xl overflow-hidden shadow-lg shadow-brand/10 bg-white/5 border border-white/10 p-2">
-                                        <img src={exp.image} alt={exp.company || exp.title} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 rounded-lg" />
+                                    <div className="w-full max-w-3xl h-64 sm:h-80 md:h-[26rem] relative group rounded-xl overflow-hidden shadow-lg shadow-brand/10 bg-white/5 border border-white/10 p-2 md:p-4 mt-2">
+                                        <img src={exp.image} alt={exp.company || exp.title} className="w-full h-full object-cover rounded-lg group-hover:scale-[1.02] transition-transform duration-700" />
                                     </div>
                                 )}
                                 <div className="flex flex-col gap-3 items-center w-full">
