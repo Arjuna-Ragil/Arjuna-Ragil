@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"log"
 	"time"
 
 	"github.com/Arjuna-Ragil/Arjuna-Ragil/internal"
@@ -22,6 +23,9 @@ type LoginInput struct {
 }
 
 func (auth *AuthConfig) LoginService(input *LoginInput) (string, error) {
+	log.Println(input.Username)
+	log.Println(input.Password)
+
 	if input.Username != auth.cfg.Username || input.Password != auth.cfg.Password {
 		return "", errors.New("invalid credentials")
 	}

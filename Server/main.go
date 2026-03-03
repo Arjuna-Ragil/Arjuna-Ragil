@@ -16,6 +16,9 @@ import (
 func main() {
 	cfg := internal.LoadConfig()
 
+	log.Println(cfg.Username)
+	log.Println(cfg.Password)
+
 	if cfg.AppEnv == "production"{
 		gin.SetMode(gin.ReleaseMode)
 	}
