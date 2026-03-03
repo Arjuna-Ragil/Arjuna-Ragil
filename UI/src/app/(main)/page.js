@@ -6,6 +6,7 @@ import Profile from "./component/profile";
 import Projects from "./component/projects";
 import TechStack from "./component/techstack";
 import Chat from "./component/chat";
+import TechStackUsed from "./component/TechStackUsed";
 
 export default function Main() {
     return (
@@ -16,6 +17,7 @@ export default function Main() {
             <TechStack />
             <Exp />
             <Projects />
+            <TechStackUsed />
             <Footer />
             <Chat />
         </>
