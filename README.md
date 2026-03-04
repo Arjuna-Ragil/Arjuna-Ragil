@@ -7,12 +7,12 @@
 ###
 
 <div align="center">
-  <a href="UI/public/document/Portfolio.pdf">
+  <a href="https://github.com/Arjuna-Ragil/Arjuna-Ragil/raw/main/UI/public/document/Portfolio.pdf">
     <img src="https://img.shields.io/badge/Portfolio-4688b0?style=for-the-badge" alt="Portfolio" />
   </a>
   &nbsp;&nbsp;
-  <a href="UI/public/document/CV.pdf">
-    <img src="https://img.shields.io/badge/CV-4688b0?style=for-the-badge&logo=adobeacrobatreader&logoColor=whit" alt="Resume" />
+  <a href="https://github.com/Arjuna-Ragil/Arjuna-Ragil/raw/main/UI/public/document/CV.pdf">
+    <img src="https://img.shields.io/badge/CV-4688b0?style=for-the-badge&logo=adobeacrobatreader&logoColor=white" alt="Resume" />
   </a>
 </div>
 
