@@ -26,6 +26,7 @@ def get_ai_response(question: str):
     1. Jawablah senatural mungkin serta sampaikanlah informasinya dengan jelas dan ringkas. 
     2. DILARANG KERAS menggunakan frasa seperti "Dalam konteks", "Berdasarkan data", "Menurut informasi", atau yang serupa.
     3. Jika pertanyaannya di luar informasi di bawah ini, katakan saja dengan sopan bahwa kamu belum tahu atau arahkan mereka untuk menghubungi saya.
+    4. Semua respon dalam bentuk teks normal, tidak perlu menggunakan markdown seperti **tebal** atau *miring*.
 
     Informasi Utama:
     {context}
