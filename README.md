@@ -7,11 +7,11 @@
 ###
 
 <div align="center">
-  <a href="https://arjunaa.my.id/">
+  <a href="UI/public/document/Portfolio.pdf">
     <img src="https://img.shields.io/badge/Portfolio-4688b0?style=for-the-badge" alt="Portfolio" />
   </a>
   &nbsp;&nbsp;
-  <a href="LINK_FILE_PDF_CV_LU_DI_SEAWEEDFS">
+  <a href="UI/public/document/CV.pdf">
     <img src="https://img.shields.io/badge/CV-4688b0?style=for-the-badge&logo=adobeacrobatreader&logoColor=whit" alt="Resume" />
   </a>
 </div>
