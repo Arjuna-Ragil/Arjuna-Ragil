@@ -7,6 +7,18 @@
 ###
 
 <div align="center">
+  <a href="https://arjunaa.my.id/">
+    <img src="https://img.shields.io/badge/Portfolio-4688b0?style=for-the-badge" alt="Portfolio" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="LINK_FILE_PDF_CV_LU_DI_SEAWEEDFS">
+    <img src="https://img.shields.io/badge/CV-4688b0?style=for-the-badge&logo=adobeacrobatreader&logoColor=whit" alt="Resume" />
+  </a>
+</div>
+
+###
+
+<div align="center">
   <a href="https://www.linkedin.com/in/arjunaragilputera/" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="linkedin logo"  />
   </a>
