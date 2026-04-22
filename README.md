@@ -35,7 +35,7 @@
 
 ## 
 
-<h3 align="center">My Tech Stack</h3>
+<h3 align="center">My Tech Stacks</h3>
 
 ###
 
